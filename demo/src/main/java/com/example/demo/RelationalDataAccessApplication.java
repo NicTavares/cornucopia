@@ -62,11 +62,13 @@ public class RelationalDataAccessApplication implements CommandLineRunner {
     }
     @GetMapping("/hello")
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
+
+
 		return String.format("Hello %s!", name);
 	}
 
     @GetMapping("/all_equ")
-    public String hello() {
+    public String showAllEquipments() {
         List<String> names = new ArrayList<>();
         jdbcTemplate.query(
                 "SELECT * FROM equipment ", (rs, rowNum) -> new Equipment(rs.getString("name"))
@@ -76,6 +78,11 @@ public class RelationalDataAccessApplication implements CommandLineRunner {
         String ret = "We have:"+String.join(", ", names)+ ":)!";
 
         return String.format("%s!", ret);
+    }
+    @GetMapping("/add_equ")//todo
+    public void addEquipments() {
+        jdbcTemplate.update("INSERT INTO equipment(name) VALUES ('new1')" );
+
     }
 
 }
