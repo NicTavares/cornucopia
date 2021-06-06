@@ -1,0 +1,6 @@
+USE cpsc_304;
+
+DROP TABLE IF EXISTS equipment;
+CREATE TABLE equipment(
+	name VARCHAR(255) PRIMARY KEY
+);
