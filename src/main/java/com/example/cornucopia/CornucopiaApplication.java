@@ -26,11 +26,6 @@ public class CornucopiaApplication implements CommandLineRunner{
         SpringApplication.run(CornucopiaApplication.class, args);
     }
 
-//    @GetMapping("/hello")
-//    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-//        return String.format("Hello %s!", name);
-//    }
-
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -39,9 +34,9 @@ public class CornucopiaApplication implements CommandLineRunner{
 
         log.info("Creating tables");
 
-        jdbcTemplate.execute("DROP TABLE IF EXISTS equipment");
-        jdbcTemplate.execute("CREATE TABLE equipment(" +
-                "name VARCHAR(255) PRIMARY KEY)");
+//        jdbcTemplate.execute("DROP TABLE IF EXISTS equipment");
+//        jdbcTemplate.execute("CREATE TABLE equipment(" +
+//                "name VARCHAR(255) PRIMARY KEY)");
 
         // Split up the array of whole names into an array of first/last names
         List<Object[]> names = new ArrayList<Object[]>();
@@ -51,7 +46,6 @@ public class CornucopiaApplication implements CommandLineRunner{
                 "knife2",};
         names.add(value1);
         names.add(value2);
-
 
         // Use a Java 8 stream to print out each tuple of the list
         names.forEach(name -> log.info(String.format("Inserting customer record for %s ", name)));
@@ -64,10 +58,9 @@ public class CornucopiaApplication implements CommandLineRunner{
                 (rs, rowNum) -> new Equipment(rs.getString("name"))
         ).forEach(equ -> log.info("test1:equ"+equ.getName()+" exists"));
     }
+
     @GetMapping("/hello")
     public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-
-
         return String.format("Hello %s!", name);
     }
 
@@ -88,5 +81,11 @@ public class CornucopiaApplication implements CommandLineRunner{
         jdbcTemplate.update("INSERT INTO equipment(name) VALUES ('new1')" );
 
     }
+
+//    public void createDefaultDB(DataSource dataSource) {
+//        Resource resource = new ClassPathResource("CreateDefaultDB.sql");
+//        ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator(resource);
+//        databasePopulator.execute(dataSource);
+//    }
 
 }
