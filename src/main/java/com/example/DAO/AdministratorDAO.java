@@ -48,7 +48,7 @@ public class AdministratorDAO implements DAO<Administrator>{
         String sql = "SELECT * from Administrator WHERE UUID = ?";
         Administrator ad = null;
         try {
-            ad = jdbcTemplate.queryForObject(sql, new Object[]{id}, rowMapper);
+            ad = jdbcTemplate.queryForObject(sql, rowMapper, id);
         } catch (DataAccessException e) {
             log.info("Administrator: " + id + " not found");
         }

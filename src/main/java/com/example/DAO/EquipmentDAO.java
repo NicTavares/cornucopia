@@ -44,7 +44,7 @@ public class EquipmentDAO implements DAO<Equipment>{
         String sql = "SELECT * FROM Equipment WHERE name = ?";
         Equipment eq = null;
         try{
-            eq = jdbcTemplate.queryForObject(sql, new Object[]{id}, rowMapper);
+            eq = jdbcTemplate.queryForObject(sql, rowMapper, id);
         }catch(DataAccessException e) {
             log.info("Equipment: " + id + " not found");
         }
