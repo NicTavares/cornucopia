@@ -6,6 +6,7 @@ public class User {
     private final int UUID;
     private final Date birthday;
     private final String email;
+    private final String username;
     private final String name;
     private final String password;
     private final String city;
@@ -13,23 +14,19 @@ public class User {
 
     public User(int UUID, Date birthday,
                 String email,
+                String username,
                 String name,
                 String password,
                 String city,
                 String postalCode) {
 
         this.UUID = UUID;
-
         this.birthday = birthday;
-
         this.email = email;
-
+        this.username = username;
         this.name = name;
-
         this.password = password;
-
         this.city = city;
-
         this.postalCode = postalCode;
     }
 
@@ -47,6 +44,10 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getName() {
