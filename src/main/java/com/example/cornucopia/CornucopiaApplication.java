@@ -80,11 +80,4 @@ public class CornucopiaApplication implements CommandLineRunner{
         jdbcTemplate.update("INSERT INTO equipment(name) VALUES ('new1')" );
 
     }
-
-//    public void createDefaultDB(DataSource dataSource) {
-//        Resource resource = new ClassPathResource("CreateDefaultDB.sql");
-//        ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator(resource);
-//        databasePopulator.execute(dataSource);
-//    }
-
 }
