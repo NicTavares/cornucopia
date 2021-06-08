@@ -14,7 +14,7 @@ VALUES  (11111, '1994-03-01','nic.tavares22@gmail.com', 'nic_tavares', 'Nic Tava
 		(11116, '1967-5-23', 'markus@gmail.com', 'markkk', 'Markus Naslund', '12345'),
 		(11117, '1989-7-05', 'hedy@gmail.com', 'hedy', 'Hedy Lamarr', 'e544785f-??');
 
-INSERT INTO Administrator(UUID, adminLevel;,password,email)
+INSERT INTO Administrator(UUID, adminLevel,password,email)
 VALUES  (11111, 1,'admin+1@gmail.com','12345'),
 		(11112, 1,'admin+2@gmail.com','12345'),
 		(11113, 1,'admin+3@gmail.com','12345'),
