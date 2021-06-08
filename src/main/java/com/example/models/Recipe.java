@@ -3,9 +3,11 @@ package com.example.models;
 public class Recipe {
 
 
+
     private int UUID;
     private String text;
     private float averageScore;
+
     private float estimatedTime;
     private int uploaderUUID;
 
@@ -16,7 +18,9 @@ public class Recipe {
                   int uploaderUUID) {
         this.UUID = UUID;
         this.text = text;
+
         this.averageScore = average_score;
+
         this.estimatedTime = estimatedTime;
         this.uploaderUUID = uploaderUUID;
 
@@ -27,7 +31,9 @@ public class Recipe {
     }
 
     public float getAverage_score() {
+
         return averageScore;
+
     }
 
     public float getEstimatedTime() {
@@ -43,6 +49,7 @@ public class Recipe {
     }
 
     public void setAverage_score(float average_score) {
+
         this.averageScore = averageScore;
     }
 
