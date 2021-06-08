@@ -13,13 +13,13 @@ public class Recipe {
 
     public Recipe(int UUID,
                   String text,
-                  float average_score,
+                  float averageScore,
                   float estimatedTime,
                   int uploaderUUID) {
         this.UUID = UUID;
         this.text = text;
 
-        this.averageScore = average_score;
+        this.averageScore = averageScore;
 
         this.estimatedTime = estimatedTime;
         this.uploaderUUID = uploaderUUID;
@@ -30,7 +30,7 @@ public class Recipe {
         return UUID;
     }
 
-    public float getAverage_score() {
+    public float getAverageScore() {
 
         return averageScore;
 
@@ -48,9 +48,5 @@ public class Recipe {
         return text;
     }
 
-    public void setAverage_score(float average_score) {
-
-        this.averageScore = averageScore;
-    }
 
 }

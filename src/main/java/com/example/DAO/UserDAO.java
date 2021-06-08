@@ -1,7 +1,6 @@
 package com.example.DAO;
 
-import com.example.models.Course;
-import com.example.models.User;
+import com.example.models.Usr;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -9,14 +8,14 @@ import org.springframework.jdbc.core.RowMapper;
 import java.util.List;
 import java.util.Optional;
 
-public class UserDAO implements DAO<User>{
+public class UsrDAO implements DAO<Usr>{
     private JdbcTemplate jdbcTemplate;
 
-    RowMapper<User> rowMapper = (rs, rowNum) -> {
-        User u = new User(rs.getInt("UUID"),
+    RowMapper<Usr> rowMapper = (rs, rowNum) -> {
+        Usr u = new Usr(rs.getInt("UUID"),
                 rs.getDate("birthday"),
                 rs.getString("email"),
-                rs.getString("username"),
+                rs.getString("usrname"),
                 rs.getString("name"),
                 rs.getString("password"),
                 rs.getString("city"),
@@ -25,36 +24,36 @@ public class UserDAO implements DAO<User>{
         return u;
     };
 
-    public UserDAO(JdbcTemplate template) {
+    public UsrDAO(JdbcTemplate template) {
         this.jdbcTemplate = template;
     }
 
     @Override
-    public List<User> list() {
-        String sql = "SELECT * FROM User";
+    public List<Usr> list() {
+        String sql = "SELECT * FROM Usr";
         return jdbcTemplate.query(sql, rowMapper);
     }
 
     @Override
-    public void create(User user) {
-        String sql = "INSERT INTO User(UUID, birthday, email, username, name, password, city, postalCode) " +
+    public void create(Usr usr) {
+        String sql = "INSERT INTO Usr(UUID, birthday, email, username, name, password, city, postalCode) " +
                 "values(?,?,?,?,?,?,?,?)";
         int rows = jdbcTemplate.update(sql,
-                user.getUUID(),
-                user.getBirthday(),
-                user.getEmail(),
-                user.getUsername(),
-                user.getPassword(),
-                user.getCity(),
-                user.getPostalCode(),
+                usr.getUUID(),
+                usr.getBirthday(),
+                usr.getEmail(),
+                usr.getUsername(),
+                usr.getPassword(),
+                usr.getCity(),
+                usr.getPostalCode(),
                 rowMapper
                 );
     }
 
     @Override
-    public Optional<User> get(String id) {
-        String sql = "SELECT * FROM User WHERE UUID = ?";
-        User u = null;
+    public Optional<Usr> get(String id) {
+        String sql = "SELECT * FROM Usr WHERE UUID = ?";
+        Usr u = null;
         try{
             u = jdbcTemplate.queryForObject(sql, rowMapper, id);
         }catch(DataAccessException e) {
@@ -64,25 +63,25 @@ public class UserDAO implements DAO<User>{
     }
 
     @Override
-    public void update(User user, String id) {
-        String sql = "UPDATE User SET UUID = ?, bithday = ?, email = ?, username = ?, name = ?, password = ?, city = ?, " +
+    public void update(Usr usr, String id) {
+        String sql = "UPDATE Usr SET UUID = ?, bithday = ?, email = ?, username = ?, name = ?, password = ?, city = ?, " +
                 "postalCode = ? WHERE UUID = ?";
         int rows = jdbcTemplate.update(sql,
-                user.getUUID(),
-                user.getBirthday(),
-                user.getEmail(),
-                user.getUsername(),
-                user.getName(),
-                user.getPassword(),
-                user.getCity(),
-                user.getPostalCode(),
+                usr.getUUID(),
+                usr.getBirthday(),
+                usr.getEmail(),
+                usr.getUsername(),
+                usr.getName(),
+                usr.getPassword(),
+                usr.getCity(),
+                usr.getPostalCode(),
                 rowMapper
         );
     }
 
     @Override
     public void delete(String id) {
-        String sql = "DELETE FROM User WHERE UUID = ?";
+        String sql = "DELETE FROM Usr WHERE UUID = ?";
         int rows = jdbcTemplate.update(sql, rowMapper, id);
     }
 }
