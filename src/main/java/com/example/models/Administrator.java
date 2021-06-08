@@ -31,4 +31,8 @@ public class Administrator {
     public int getAdminLevel() {
         return adminLevel;
     }
+
+
+    // Admin_UUID: INT, admin_level: INT, password: CHAR, email: CHAR
+
 }

@@ -3,6 +3,9 @@ package com.example.models;
 import java.sql.Date;
 
 public class Message {
+
+ 
+  
     private int UUID;
     private String text;
     private int senderUUID;
