@@ -27,7 +27,7 @@ CREATE TABLE Usr (
 
 CREATE TABLE Administrator (
 	UUID INT PRIMARY KEY,
-	level VARCHAR(255),
+	adminLevel VARCHAR(255),
 	password  VARCHAR(255),
 	email VARCHAR(255),
 	FOREIGN KEY (UUID) references Usr(UUID)

@@ -14,7 +14,7 @@ public class RecipeDAO implements DAO<Recipe>{
     RowMapper<Recipe> rowMapper = (rs, rowNum) -> {
         Recipe r = new Recipe(rs.getInt("UUID"),
                 rs.getString("text"),
-                rs.getFloat("average_score"),
+                rs.getFloat("averageScore"),
                 rs.getFloat("estimatedTime"),
                 rs.getInt("uploaderUUID")
         );
@@ -33,11 +33,11 @@ public class RecipeDAO implements DAO<Recipe>{
 
     @Override
     public void create(Recipe recipe) {
-        String sql = "INSERT INTO Recipe(UUID, text, average_score, estimatedTime, uploaderUUID) values(?,?,?,?,?)";
+        String sql = "INSERT INTO Recipe(UUID, text, averageScore, estimatedTime, uploaderUUID) values(?,?,?,?,?)";
         int rows = jdbcTemplate.update(sql,
                 recipe.getUUID(),
                 recipe.getText(),
-                recipe.getAverage_score(),
+                recipe.getAverageScore(),
                 recipe.getEstimatedTime(),
                 recipe.getUploaderUUID(),
                 rowMapper
@@ -58,11 +58,11 @@ public class RecipeDAO implements DAO<Recipe>{
 
     @Override
     public void update(Recipe recipe, String id) {
-        String sql = "UPDATE Recipe SET UUID = ?, text = ?, average_score = ?, estimatedTime = ?, uploaderUUID = ? WHERE UUID = ?";
+        String sql = "UPDATE Recipe SET UUID = ?, text = ?, averageScore = ?, estimatedTime = ?, uploaderUUID = ? WHERE UUID = ?";
         int rows = jdbcTemplate.update(sql,
                 recipe.getUUID(),
                 recipe.getText(),
-                recipe.getAverage_score(),
+                recipe.getAverageScore(),
                 recipe.getEstimatedTime(),
                 recipe.getUploaderUUID(),
                 id,
