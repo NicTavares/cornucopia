@@ -2,7 +2,7 @@ package com.example.models;
 
 import java.sql.Date;
 
-public class User {
+public class Usr {
     private final int UUID;
     private final Date birthday;
     private final String email;
@@ -12,7 +12,7 @@ public class User {
     private final String city;
     private final String postalCode;
 
-    public User(int UUID, Date birthday,
+    public Usr(int UUID, Date birthday,
                 String email,
                 String username,
                 String name,
