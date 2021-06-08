@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class UsrDAO implements DAO<Usr>{
+
     private JdbcTemplate jdbcTemplate;
 
     RowMapper<Usr> rowMapper = (rs, rowNum) -> {
@@ -20,7 +21,7 @@ public class UsrDAO implements DAO<Usr>{
                 rs.getString("password"),
                 rs.getString("city"),
                 rs.getString("postalCode")
-                );
+        );
         return u;
     };
 
@@ -47,7 +48,7 @@ public class UsrDAO implements DAO<Usr>{
                 usr.getCity(),
                 usr.getPostalCode(),
                 rowMapper
-                );
+        );
     }
 
     @Override
