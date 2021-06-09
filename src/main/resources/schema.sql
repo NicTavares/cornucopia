@@ -18,11 +18,13 @@ CREATE TABLE Usr (
        UUID INT PRIMARY KEY,
        birthday DATE,
        email VARCHAR(255) NOT NULL,
-       usrname VARCHAR(255) NOT NULL,
+       username VARCHAR(255) NOT NULL,
        name VARCHAR(255) NOT NULL,
        password VARCHAR(255) NOT NULL,
+       city VARCHAR(255) ,
+       postalCode VARCHAR(255) ,
        UNIQUE (email),
-       UNIQUE (usrname)
+       UNIQUE (username)
 );
 
 CREATE TABLE Administrator (

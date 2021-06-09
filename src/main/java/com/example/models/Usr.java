@@ -12,7 +12,8 @@ public class Usr {
     private final String city;
     private final String postalCode;
 
-    public Usr(int UUID, Date birthday,
+    public Usr(int UUID,
+                Date birthday,
                 String email,
                 String username,
                 String name,
