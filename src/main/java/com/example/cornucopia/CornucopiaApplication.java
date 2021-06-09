@@ -3,6 +3,7 @@ package com.example.cornucopia;
 import com.example.models.Equipment;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@ComponentScan("com.example")
 @SpringBootApplication
 @RestController
 public class CornucopiaApplication implements CommandLineRunner{
@@ -75,9 +76,7 @@ public class CornucopiaApplication implements CommandLineRunner{
 
         return String.format("%s!", ret);
     }
-    @GetMapping("/add_equ")//todo
-    public void addEquipments() {
-        jdbcTemplate.update("INSERT INTO equipment(name) VALUES ('new1')" );
 
-    }
+
+
 }
