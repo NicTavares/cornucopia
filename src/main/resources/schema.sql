@@ -1,17 +1,25 @@
 USE cpsc_304;
 
 DROP TABLE IF EXISTS Course;
+DROP TABLE IF EXISTS Picture;
 DROP TABLE IF EXISTS Equipment;
 DROP TABLE IF EXISTS Administrator;
-
+DROP TABLE IF EXISTS Comments;
+DROP TABLE IF EXISTS Collection;
 DROP TABLE IF EXISTS Message;
 DROP TABLE IF EXISTS Tag;
 DROP TABLE IF EXISTS Ingredient;
-DROP TABLE IF EXISTS recipe;
+DROP TABLE IF EXISTS Recipe;
 DROP TABLE IF EXISTS Usr;
+DROP TABLE IF EXISTS Technique;
 
-CREATE TABLE Equipment(
+CREATE TABLE Equipment (
 	name VARCHAR(255) PRIMARY KEY
+);
+
+CREATE TABLE Technique (
+	requirementName VARCHAR(255) PRIMARY KEY,
+	difficulty INT
 );
 
 CREATE TABLE Usr (
@@ -25,6 +33,14 @@ CREATE TABLE Usr (
        postalCode VARCHAR(255) ,
        UNIQUE (email),
        UNIQUE (username)
+);
+
+CREATE TABLE Collection (
+	name VARCHAR(255),
+	userUUID INT,
+	PRIMARY KEY (name, userUUID),
+	FOREIGN KEY (userUUID) REFERENCES Usr(UUID)
+		ON DELETE CASCADE
 );
 
 CREATE TABLE Administrator (
@@ -56,30 +72,52 @@ CREATE TABLE Tag(
 
 CREATE TABLE Recipe (
 	UUID INT PRIMARY KEY,
+	name VARCHAR(255) NOT NULL,
 	text LONGTEXT NOT NULL,
 	averageScore FLOAT,
 	estimatedTime FLOAT,
 	uploaderUUID INT,
 	FOREIGN KEY (uploaderUUID) REFERENCES Usr(UUID)
-	ON DELETE SET NULL
+		ON DELETE SET NULL
+);
 
+CREATE TABLE Picture (
+	recipeUUID INT, 
+	pictureTitle VARCHAR(255),
+	userUUID INT,
+	filepath VARCHAR(255) NOT NULL,
+	PRIMARY KEY(recipeUUID, userUUID, pictureTitle),
+	FOREIGN KEY (recipeUUID) REFERENCES Recipe(UUID)
+		ON DELETE CASCADE,
+	FOREIGN KEY (userUUID) REFERENCES Users(UUID)
+		ON DELETE CASCADE
+);
+
+CREATE TABLE Comments (
+	recipeUUID INT,
+	commentNumber INT,
+	text VARCHAR(1000) NOT NULL,
+	authorUUID INT,
+	PRIMARY KEY (recipeUUID, commentNumber),
+	FOREIGN KEY (recipeUUID) REFERENCES Recipe(UUID)
+		ON DELETE CASCADE,
+	FOREIGN KEY (authorUUID) REFERENCES Usr(UUID)
+		ON DELETE SET NULL
 );
 
 CREATE TABLE Ingredient(
 	name VARCHAR(255) PRIMARY KEY
 );
 
-
-
 CREATE TABLE Message (
     UUID INT PRIMARY KEY,
-    Text VARCHAR(255) NOT NULL,
+    text VARCHAR(1000) NOT NULL,
     senderUUID INT,
-    sentTime TIME NOT NULL,
+    sentTime DATETIME NOT NULL,
     receiverUUID INT,
     UNIQUE (senderUUID,receiverUUID,sentTime),
     FOREIGN KEY (senderUUID) REFERENCES Usr(UUID)
-    ON DELETE CASCADE,
+		ON DELETE CASCADE,
     FOREIGN KEY (receiverUUID) REFERENCES Usr(UUID)
-    ON DELETE CASCADE
+		ON DELETE CASCADE
 );
