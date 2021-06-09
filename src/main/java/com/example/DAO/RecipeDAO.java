@@ -13,6 +13,7 @@ public class RecipeDAO implements DAO<Recipe>{
 
     RowMapper<Recipe> rowMapper = (rs, rowNum) -> {
         Recipe r = new Recipe(rs.getInt("UUID"),
+                rs.getString("name"),
                 rs.getString("text"),
                 rs.getFloat("averageScore"),
                 rs.getFloat("estimatedTime"),
