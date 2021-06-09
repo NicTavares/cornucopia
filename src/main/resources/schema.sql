@@ -1,9 +1,11 @@
 USE cpsc_304;
 
 DROP TABLE IF EXISTS Course;
+DROP TABLE IF EXISTS Picture;
 DROP TABLE IF EXISTS Equipment;
 DROP TABLE IF EXISTS Administrator;
-
+DROP TABLE IF EXISTS Comments;
+DROP TABLE IF EXISTS Collection;
 DROP TABLE IF EXISTS Message;
 DROP TABLE IF EXISTS Tag;
 DROP TABLE IF EXISTS Ingredient;
@@ -31,6 +33,14 @@ CREATE TABLE Usr (
        postalCode VARCHAR(255) ,
        UNIQUE (email),
        UNIQUE (username)
+);
+
+CREATE TABLE Collection (
+	name VARCHAR(255),
+	userUUID INT,
+	PRIMARY KEY (name, userUUID),
+	FOREIGN KEY (userUUID) REFERENCES Usr(UUID)
+		ON DELETE CASCADE
 );
 
 CREATE TABLE Administrator (
@@ -68,6 +78,30 @@ CREATE TABLE Recipe (
 	estimatedTime FLOAT,
 	uploaderUUID INT,
 	FOREIGN KEY (uploaderUUID) REFERENCES Usr(UUID)
+		ON DELETE SET NULL
+);
+
+CREATE TABLE Picture (
+	recipeUUID INT, 
+	pictureTitle VARCHAR(255),
+	userUUID INT,
+	filepath VARCHAR(255) NOT NULL,
+	PRIMARY KEY(recipeUUID, userUUID, pictureTitle),
+	FOREIGN KEY (recipeUUID) REFERENCES Recipe(UUID)
+		ON DELETE CASCADE,
+	FOREIGN KEY (userUUID) REFERENCES Users(UUID)
+		ON DELETE CASCADE
+);
+
+CREATE TABLE Comments (
+	recipeUUID INT,
+	commentNumber INT,
+	text VARCHAR(1000) NOT NULL,
+	authorUUID INT,
+	PRIMARY KEY (recipeUUID, commentNumber),
+	FOREIGN KEY (recipeUUID) REFERENCES Recipe(UUID)
+		ON DELETE CASCADE,
+	FOREIGN KEY (authorUUID) REFERENCES Usr(UUID)
 		ON DELETE SET NULL
 );
 

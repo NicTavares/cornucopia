@@ -49,6 +49,27 @@ VALUES  (11111, 1, '12345','admin+1@gmail.com'),
 		(11114, 2, '12345','admin+4@gmail.com'),
 		(11115, 3, '12345', 'admin+5@gmail.com');
 		
+INSERT INTO Comments(recipeUUID, commentNumber, text, authorUUID) 
+VALUES  (00001, 1, 'First', 11111),
+		(00003, 2, 'Noice', 11114),
+		(00001, 3, 'Second', 11114),
+		(00004, 4, 'nice recipe :)', 11116),
+		(00004, 1, 'First', 11116);
+		
+INSERT INTO Collection(name, userUUID) 
+VALUES  ('breakfast', 11111),
+		('polly''s birthday', 11113),
+		('I want it', 11111),
+		('quick lunches', 11114),
+		('easy dishes', 11112);
+		
+INSERT INTO Picture(recipeUUID, pictureTitle, userUUID, filepath) 
+VALUES  (00001, 'Cover', 11111, './Pictures/cover11111.png'),
+		(00001, 'fig1', 11111, './Pictures/fig11111.png'), 
+		(00002, 'Cover', 11112, './Pictures/cover11112.png'),
+		(00003, 'my results', 11115, './Pictures/results11113.png'),
+		(00004, 'Cover', 11115, './Pictures/cover_1213.png');
+
 INSERT INTO Message(UUID, text, senderUUID, sentTime, receiverUUID)
 VALUES  (00001, 'Hello', 11111, '2021-05-04 23:31:00', 11112),
 		(00002, 'Hi', 11112, '2021-05-04 23:33:00', 11111),
