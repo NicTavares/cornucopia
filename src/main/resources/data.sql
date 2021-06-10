@@ -83,3 +83,4 @@ VALUES  (10011, 'Knives are great, hold them with your hand...', 10, 'How to use
 		(10013, 'Press the buttons...', 15, 'How to operate a microwave', 'microwave', 11113),
 		(10014, 'Don''t use metal spatula...', 5, 'How to use a non-stick pan', 'non-stick pan', 11111),
 		(10015, 'Water at 80 degrees...', 5, 'How to brew green tea', 'electric kettle', 11112);
+
