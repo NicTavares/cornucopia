@@ -5,10 +5,11 @@ import com.example.models.Ingredient;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-
+@Component
 public class IngredientDAO implements DAO<Ingredient>{
     private JdbcTemplate jdbcTemplate;
     RowMapper<Ingredient> rowMapper = (rs, rowNum) -> {
@@ -30,7 +31,7 @@ public class IngredientDAO implements DAO<Ingredient>{
     @Override
     public void create(Ingredient ingredient) {
         String sql = "INSERT INTO Ingredient(name) values(?)";
-        int rows = jdbcTemplate.update(sql, rowMapper, ingredient.getName());
+        int rows = jdbcTemplate.update(sql, ingredient.getName());
     }
 
     @Override
@@ -48,12 +49,12 @@ public class IngredientDAO implements DAO<Ingredient>{
     @Override
     public void update(Ingredient ingredient, String id) {
         String sql = "UPDATE Ingredient SET name = ? WHERE name = ?";
-        int rows = jdbcTemplate.update(sql, rowMapper, ingredient.getName(), id);
+        int rows = jdbcTemplate.update(sql, ingredient.getName(), id);
     }
 
     @Override
     public void delete(String id) {
         String sql = "DELETE FROM Ingredient WHERE name = ?";
-        int rows = jdbcTemplate.update(sql, rowMapper, id);
+        int rows = jdbcTemplate.update(sql, id);
     }
 }

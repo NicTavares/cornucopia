@@ -80,18 +80,18 @@ CREATE TABLE Recipe (
 	FOREIGN KEY (uploaderUUID) REFERENCES Usr(UUID)
 		ON DELETE SET NULL
 );
-
-CREATE TABLE Picture (
-	recipeUUID INT, 
-	pictureTitle VARCHAR(255),
-	userUUID INT,
-	filepath VARCHAR(255) NOT NULL,
-	PRIMARY KEY(recipeUUID, userUUID, pictureTitle),
-	FOREIGN KEY (recipeUUID) REFERENCES Recipe(UUID)
-		ON DELETE CASCADE,
-	FOREIGN KEY (userUUID) REFERENCES Users(UUID)
-		ON DELETE CASCADE
-);
+--
+-- CREATE TABLE Picture (
+-- 	recipeUUID INT,
+-- 	pictureTitle VARCHAR(255),
+-- 	userUUID INT,
+-- 	filepath VARCHAR(255) NOT NULL,
+-- 	PRIMARY KEY(recipeUUID, userUUID, pictureTitle),
+-- 	FOREIGN KEY (recipeUUID) REFERENCES Recipe(UUID)
+-- 		ON DELETE CASCADE,
+-- 	FOREIGN KEY (userUUID) REFERENCES Users(UUID)
+-- 		ON DELETE CASCADE
+-- );
 
 CREATE TABLE Comments (
 	recipeUUID INT,

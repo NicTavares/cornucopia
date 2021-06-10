@@ -63,12 +63,12 @@ VALUES  ('breakfast', 11111),
 		('quick lunches', 11114),
 		('easy dishes', 11112);
 		
-INSERT INTO Picture(recipeUUID, pictureTitle, userUUID, filepath) 
-VALUES  (00001, 'Cover', 11111, './Pictures/cover11111.png'),
-		(00001, 'fig1', 11111, './Pictures/fig11111.png'), 
-		(00002, 'Cover', 11112, './Pictures/cover11112.png'),
-		(00003, 'my results', 11115, './Pictures/results11113.png'),
-		(00004, 'Cover', 11115, './Pictures/cover_1213.png');
+-- INSERT INTO Picture(recipeUUID, pictureTitle, userUUID, filepath)
+-- VALUES  (00001, 'Cover', 11111, './Pictures/cover11111.png'),
+-- 		(00001, 'fig1', 11111, './Pictures/fig11111.png'),
+-- 		(00002, 'Cover', 11112, './Pictures/cover11112.png'),
+-- 		(00003, 'my results', 11115, './Pictures/results11113.png'),
+-- 		(00004, 'Cover', 11115, './Pictures/cover_1213.png');
 
 INSERT INTO Message(UUID, text, senderUUID, sentTime, receiverUUID)
 VALUES  (00001, 'Hello', 11111, '2021-05-04 23:31:00', 11112),
