@@ -87,6 +87,10 @@ public class UsrDAO implements DAO<Usr>{
         String sql = "DELETE FROM Usr WHERE UUID = ?";
         int rows = jdbcTemplate.update(sql,  Integer.parseInt(id));
     }
+    public int geNextUUID() {
+        String sql = "SELECT MAX(UUID) FROM Usr";
+        return jdbcTemplate.queryForObject(sql, Integer.class )+1;
 
+    }
 
 }

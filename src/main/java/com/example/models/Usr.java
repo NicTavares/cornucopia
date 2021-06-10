@@ -3,14 +3,14 @@ package com.example.models;
 import java.sql.Date;
 
 public class Usr {
-    private final int UUID;
-    private final Date birthday;
-    private final String email;
-    private final String username;
-    private final String name;
-    private final String password;
-    private final String city;
-    private final String postalCode;
+    private  int UUID;
+    private  Date birthday;
+    private  String email;
+    private  String username;
+    private  String name;
+    private  String password;
+    private  String city;
+    private  String postalCode;
 
     public Usr(int UUID,
                 Date birthday,
@@ -61,6 +61,10 @@ public class Usr {
 
     public String getPostalCode() {
         return postalCode;
+    }
+
+    public void setUUID(int UUID){
+        this.UUID=UUID;
     }
 
 }
