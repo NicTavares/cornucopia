@@ -4,10 +4,12 @@ import com.example.models.Recipe;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class RecipeDAO implements DAO<Recipe>{
     private JdbcTemplate jdbcTemplate;
 
@@ -34,14 +36,14 @@ public class RecipeDAO implements DAO<Recipe>{
 
     @Override
     public void create(Recipe recipe) {
-        String sql = "INSERT INTO Recipe(UUID, text, averageScore, estimatedTime, uploaderUUID) values(?,?,?,?,?)";
+        String sql = "INSERT INTO Recipe(UUID, name,text, averageScore, estimatedTime, uploaderUUID) values(?,?,?,?,?,?)";
         int rows = jdbcTemplate.update(sql,
                 recipe.getUUID(),
+                recipe.getName(),
                 recipe.getText(),
                 recipe.getAverageScore(),
                 recipe.getEstimatedTime(),
-                recipe.getUploaderUUID(),
-                rowMapper
+                recipe.getUploaderUUID()
         );
     }
 
@@ -62,12 +64,13 @@ public class RecipeDAO implements DAO<Recipe>{
         String sql = "UPDATE Recipe SET UUID = ?, text = ?, averageScore = ?, estimatedTime = ?, uploaderUUID = ? WHERE UUID = ?";
         int rows = jdbcTemplate.update(sql,
                 recipe.getUUID(),
+                recipe.getName(),
                 recipe.getText(),
                 recipe.getAverageScore(),
                 recipe.getEstimatedTime(),
                 recipe.getUploaderUUID(),
-                id,
-                rowMapper
+                Integer.parseInt(id)
+
         );
     }
 
