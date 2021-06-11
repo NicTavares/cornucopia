@@ -31,6 +31,7 @@ public class UsrController
     @PostMapping(path="/addUsr")
     public ResponseEntity addUsr(@RequestBody Usr usr)
     {
+        usr.setUUID(usrDAO.geNextUUID());
         usrDAO.create(usr);
         return ResponseEntity.ok("New usr added");
     }
@@ -48,6 +49,8 @@ public class UsrController
         usrDAO.delete(Integer.toString(UUID));
         return ResponseEntity.ok(String.format("Usr %d is deleted",UUID));
     }
+
+//
 //Test request body:
 //    {
 //        "UUID":10,

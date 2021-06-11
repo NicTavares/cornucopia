@@ -18,7 +18,7 @@ CREATE TABLE Equipment (
 );
 
 CREATE TABLE Technique (
-	requirementName VARCHAR(255) PRIMARY KEY,
+	name VARCHAR(255) PRIMARY KEY,
 	difficulty INT
 );
 
