@@ -79,4 +79,37 @@ public class RecipeDAO implements DAO<Recipe>{
         String sql = "DELETE Recipe WHERE UUID = ?";
         int rows = jdbcTemplate.update(sql, rowMapper, id);
     }
+
+    public int getNextUUID() {
+        String sql = "SELECT MAX(UUID) FROM Recipe";
+        return jdbcTemplate.queryForObject(sql, Integer.class )+1;
+
+    }
+
+
+    public void createRecipeTag(int recipeUUID,String tagName) {
+        String sql = "INSERT INTO RecipeHasTag(UUID, name) values(?,?)";
+        int rows = jdbcTemplate.update(sql,
+                recipeUUID,tagName
+        );
+    }
+    public void createRecipeIngredient(int recipeUUID,String ingredientName) {
+        String sql = "INSERT INTO RecipeHasIngredient(UUID, name) values(?,?)";
+        int rows = jdbcTemplate.update(sql,
+                recipeUUID,ingredientName
+        );
+    }
+    public void createRecipeEquipment(int recipeUUID,String equipmentName) {
+        String sql = "INSERT INTO RecipeHasEquipment(UUID, name) values(?,?)";
+        int rows = jdbcTemplate.update(sql,
+                recipeUUID,equipmentName
+        );
+    }
+    public void createRecipeTechnique(int recipeUUID,String techniqueName) {
+        String sql = "INSERT INTO RecipeHasTechnique(UUID, name) values(?,?)";
+        int rows = jdbcTemplate.update(sql,
+                recipeUUID,techniqueName
+        );
+    }
+
 }

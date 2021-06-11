@@ -49,5 +49,7 @@ public class Recipe {
         return text;
     }
 
-
+    public void setUUID(int UUID) {
+        this.UUID = UUID;
+    }
 }
