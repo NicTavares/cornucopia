@@ -38,7 +38,7 @@ public class EquipmentDAO implements DAO<Equipment>{
 
     @Override
     public void create(Equipment equipment) {
-        log.info(equipment.getName());
+        //log.info(equipment.getName());
         String sql = "INSERT into Equipment(name) values(?)";
         int rows = jdbcTemplate.update(sql, equipment.getName());
         if(rows == 1) {

@@ -17,6 +17,7 @@ public class UsrController
     @Autowired
     UsrDAO usrDAO;
 
+
     @GetMapping(path="/getAllUsr")
     public List<Usr> getAllUsr()
     {
@@ -33,6 +34,7 @@ public class UsrController
     {
         usr.setUUID(usrDAO.geNextUUID());
         usrDAO.create(usr);
+
         return ResponseEntity.ok("New usr added");
     }
 
@@ -50,6 +52,18 @@ public class UsrController
         return ResponseEntity.ok(String.format("Usr %d is deleted",UUID));
     }
 
+    @PostMapping(path="/favouriteRecipe/{usrUUID}/{recipeUUID}")
+    public ResponseEntity<String> favouriteRecipe( @PathVariable int usrUUID, @PathVariable int recipeUUID)
+    {
+        usrDAO.createFavouriteRecipe(usrUUID,recipeUUID);
+        return ResponseEntity.ok("favourite added");
+    }
+    @GetMapping(path="/getFavourites/{UUID}")
+    //todo
+    public List<Integer> getFavourites(@PathVariable int UUID)
+    {
+        return usrDAO.getFavouriteRecipes(UUID);
+    }
 //
 //Test request body:
 //    {
