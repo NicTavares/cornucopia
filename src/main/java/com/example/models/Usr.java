@@ -3,6 +3,7 @@ package com.example.models;
 import java.sql.Date;
 
 public class Usr {
+
     private  int UUID;
     private  Date birthday;
     private  String email;

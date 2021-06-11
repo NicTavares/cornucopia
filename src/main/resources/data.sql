@@ -5,7 +5,7 @@ VALUES  ('knife'),
 		('non-stick pan'),
 		('electric kettle');
 
-INSERT INTO Technique (requirementName, difficulty)
+INSERT INTO Technique (name, difficulty)
 VALUES  ('knife skills', 4),
 		('deboning', 3),
 		('steaming a fish', 2),

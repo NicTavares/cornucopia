@@ -53,10 +53,10 @@ public class CornucopiaApplication implements CommandLineRunner{
 //        // Uses JdbcTemplate's batchUpdate operation to bulk load data
 //        jdbcTemplate.batchUpdate("INSERT INTO equipment(name) VALUES (?)",  names);
 
-        jdbcTemplate.query(
-                "SELECT name FROM equipment WHERE name = ?", new Object[] { "knife1" },
-                (rs, rowNum) -> new Equipment(rs.getString("name"))
-        ).forEach(equ -> log.info("test1:equ"+equ.getName()+" exists"));
+//        jdbcTemplate.query(
+//                "SELECT name FROM equipment WHERE name = ?", new Object[] { "knife1" },
+//                (rs, rowNum) -> new Equipment(rs.getString("name"))
+//        ).forEach(equ -> log.info("test1:equ"+equ.getName()+" exists"));
     }
 
     @GetMapping("/hello")

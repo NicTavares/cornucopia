@@ -1,19 +1,25 @@
 package com.example.DAO;
 
+import com.example.cornucopia.CornucopiaApplication;
 import com.example.models.Equipment;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
+@Component
 public class EquipmentDAO implements DAO<Equipment>{
 
-    private static final Logger log = (Logger) LoggerFactory.getLogger(EquipmentDAO.class);
-    private JdbcTemplate jdbcTemplate;
+   private static final Logger log = LoggerFactory.getLogger(EquipmentDAO.class);
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     RowMapper<Equipment> rowMapper = (rs, rowNum) -> {
         Equipment eq = new Equipment(rs.getString("name"));
@@ -32,6 +38,7 @@ public class EquipmentDAO implements DAO<Equipment>{
 
     @Override
     public void create(Equipment equipment) {
+        log.info(equipment.getName());
         String sql = "INSERT into Equipment(name) values(?)";
         int rows = jdbcTemplate.update(sql, equipment.getName());
         if(rows == 1) {
@@ -54,12 +61,12 @@ public class EquipmentDAO implements DAO<Equipment>{
     @Override
     public void update(Equipment equipment, String id) {
         String sql = "UPDATE equipment SET name = ? WHERE name = ?";
-        int update = jdbcTemplate.update(sql, equipment.getName(), rowMapper);
+        int update = jdbcTemplate.update(sql, equipment.getName());
     }
 
     @Override
     public void delete(String id) {
         String sql = "DELETE FROM Equipment WHERE name = ?";
-        int update = jdbcTemplate.update(sql, id, rowMapper);
+        int update = jdbcTemplate.update(sql, id);
     }
 }
