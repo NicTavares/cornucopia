@@ -57,4 +57,19 @@ public class IngredientDAO implements DAO<Ingredient>{
         String sql = "DELETE FROM Ingredient WHERE name = ?";
         int rows = jdbcTemplate.update(sql, id);
     }
+//check if the list are set
+//    {
+//        "recipe":{
+//        "UUID":11,
+//                "name":"test recipe",
+//                "text":"test context",
+//                "averageScore":0,
+//                "estimatedTime":15,
+//                "uploaderUUID":11111
+//    },
+//        "tags":["testtag1","testtag2"],
+//        "ingredients":["test_ingredient_1","test_ingredient_2"],
+//        "equipments":["test_equipment_1","test_equipment_2"],
+//        "techniques":["test_techniques_1","test_techniques_2"]
+//    }
 }

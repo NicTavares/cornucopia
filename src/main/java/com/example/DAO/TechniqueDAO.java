@@ -36,7 +36,7 @@ public class TechniqueDAO implements DAO<Technique> {
     public void create(Technique technique) {
 
         String sql = "INSERT into Technique(name,difficulty) values(?,?)";
-        int rows = jdbcTemplate.update(sql, technique.getName(),technique.getDifficulty());
+        int rows = jdbcTemplate.update(sql, technique.getName(),5);
     }
 
     @Override
