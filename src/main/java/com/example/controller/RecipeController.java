@@ -24,6 +24,9 @@ public class RecipeController {
     EquipmentDAO equipmentDAO;
     @Autowired
     TechniqueDAO techniqueDAO;
+
+    @Autowired
+    RatingDAO ratingDAO;
     private static final Logger log = LoggerFactory.getLogger(RecipeController.class);
 
     @GetMapping(path = "/getAllRecipe")
@@ -117,20 +120,32 @@ public class RecipeController {
         return ResponseEntity.ok("New recipe added");
     }
 
-    static class commentPayload {
-        int commenterUUID;
-        int recipeUUID;
-        int commentNumber;
-        String text;
-
+    static class UsrRateRecipePayload {
+        public int usrUUID;
+        public int recipeUUID;
+        public int score;
     }
 
-    @PostMapping(path = "/postComment")
-    public ResponseEntity postComment(@RequestBody RecipePayload recipePayload) {
-
+    @PostMapping(path = "/usrRateRecipe")
+    public ResponseEntity usrRateRecipe(@RequestBody UsrRateRecipePayload usrRateRecipePayload) {
+        log.info(String.format("%d",usrRateRecipePayload.usrUUID));
+        log.info(String.format("%d",usrRateRecipePayload.recipeUUID));
+        ratingDAO.create(usrRateRecipePayload.usrUUID,usrRateRecipePayload.recipeUUID,usrRateRecipePayload.score);
+        recipeDAO.updateScore(Integer.toString(usrRateRecipePayload.recipeUUID),ratingDAO.getScore(usrRateRecipePayload.recipeUUID));
+        return ResponseEntity.ok("rated successfully");
     }
+//    static class commentPayload {
+//        int commenterUUID;
+//        int recipeUUID;
+//        int commentNumber;
+//        String text;
+//
+//    }
 
-
+//    @PostMapping(path = "/postComment")
+//    public ResponseEntity postComment(@RequestBody RecipePayload recipePayload) {
+//
+//    }
 
 
 //{
@@ -141,5 +156,5 @@ public class RecipeController {
 //    "estimatedTime":15,
 //    "uploaderUUID":11111
 //}
-    
-}
+
+    }
