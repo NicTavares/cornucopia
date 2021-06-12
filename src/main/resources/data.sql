@@ -89,3 +89,10 @@ VALUES (11114, "fish", 1),
 (11115, "potato", 3),
 (11112, "chicken", 2),
 (11112, "potato", 4);
+
+INSERT INTO UsrRateRecipe (usrUUID, recipeUUID, score) VALUES
+(11111, 1,7),
+(11114, 2,5),
+(11114, 3,7),
+(11112, 4,9),
+(11113, 5,8);
