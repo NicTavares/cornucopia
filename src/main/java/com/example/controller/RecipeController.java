@@ -117,6 +117,21 @@ public class RecipeController {
         return ResponseEntity.ok("New recipe added");
     }
 
+    static class commentPayload {
+        int commenterUUID;
+        int recipeUUID;
+        int commentNumber;
+        String text;
+
+    }
+
+    @PostMapping(path = "/postComment")
+    public ResponseEntity postComment(@RequestBody RecipePayload recipePayload) {
+
+    }
+
+
+
 
 //{
 //    "UUID":10,

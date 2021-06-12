@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 @Component
@@ -104,5 +106,30 @@ public class UsrDAO implements DAO<Usr>{
         return jdbcTemplate.queryForObject(sql, Integer.class )+1;
 
     }
+
+
+    public void createFavouriteRecipe(int usrUUID,int recipeUUID) {
+        String sql = "INSERT INTO UsrFavouriteRecipe(usrUUID,recipeUUID) VALUES(?,?)";
+        int rows = jdbcTemplate.update(sql,usrUUID,recipeUUID);
+    }
+
+    public List<Integer> getFavouriteRecipes(int usrUUID) {
+        String sql = "SELECT recipeUUID FROM UsrFavouriteRecipe WHERE usrUUID=?";
+
+        try{
+            List<Integer> data = jdbcTemplate.query(sql, new RowMapper<Integer>(){
+                public Integer mapRow(ResultSet rs, int rowNum)
+                        throws SQLException {
+                    return rs.getInt(1);
+                }
+            },usrUUID);
+            return data;
+        }catch(DataAccessException e) {}
+
+
+        return null;
+    }
+
+
 
 }

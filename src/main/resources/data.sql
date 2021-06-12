@@ -56,13 +56,13 @@ VALUES  (00001, 1, 'First', 11111),
 		(00004, 4, 'nice recipe :)', 11116),
 		(00004, 1, 'First', 11116);
 		
-INSERT INTO Collection(name, userUUID) 
-VALUES  ('breakfast', 11111),
-		('polly''s birthday', 11113),
-		('I want it', 11111),
-		('quick lunches', 11114),
-		('easy dishes', 11112);
-		
+INSERT INTO UsrFavouriteRecipe(usrUUID,recipeUUID)
+VALUES  ( 11111,1),
+		( 11111,2),
+		( 11113,3),
+		( 11114,4),
+		( 11115,5);
+
 -- INSERT INTO Picture(recipeUUID, pictureTitle, userUUID, filepath)
 -- VALUES  (00001, 'Cover', 11111, './Pictures/cover11111.png'),
 -- 		(00001, 'fig1', 11111, './Pictures/fig11111.png'),
@@ -83,4 +83,9 @@ VALUES  (10011, 'Knives are great, hold them with your hand...', 10, 'How to use
 		(10013, 'Press the buttons...', 15, 'How to operate a microwave', 'microwave', 11113),
 		(10014, 'Don''t use metal spatula...', 5, 'How to use a non-stick pan', 'non-stick pan', 11111),
 		(10015, 'Water at 80 degrees...', 5, 'How to brew green tea', 'electric kettle', 11112);
-
+INSERT INTO UsrHasIngredient(usrUUID, name, quantity)
+VALUES (11114, "fish", 1),
+(11113, "egg", 8),
+(11115, "potato", 3),
+(11112, "chicken", 2),
+(11112, "potato", 4);
