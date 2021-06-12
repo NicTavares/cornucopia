@@ -5,6 +5,7 @@ package com.example.controller;
 import com.example.DAO.UsrDAO;
 import com.example.models.Usr;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +36,8 @@ public class UsrController
         usr.setUUID(usrDAO.geNextUUID());
         usrDAO.create(usr);
 
-        return ResponseEntity.ok("New usr added");
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body("new user added ");
     }
 
     @PutMapping(path="/updateUsr/{UUID}")
