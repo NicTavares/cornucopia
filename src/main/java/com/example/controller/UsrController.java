@@ -3,8 +3,12 @@
 package com.example.controller;
 
 import com.example.DAO.UsrDAO;
+import com.example.models.Recipe;
 import com.example.models.Usr;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +21,7 @@ public class UsrController
     @Autowired
     UsrDAO usrDAO;
 
+    private static final Logger log = LoggerFactory.getLogger(UsrController.class);
 
     @GetMapping(path="/getAllUsr")
     public List<Usr> getAllUsr()
@@ -50,6 +55,28 @@ public class UsrController
     {
         usrDAO.delete(Integer.toString(UUID));
         return ResponseEntity.ok(String.format("Usr %d is deleted",UUID));
+    }
+    static class AuthPayload {
+        public String username;
+        public String password;
+    }
+    
+    @GetMapping(path="/authUsr")
+    public ResponseEntity authUsr(@RequestBody AuthPayload authPayload)
+    {
+
+        if(usrDAO.getPasswordByUsername(authPayload.username).isEmpty()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Wrong username");
+        }
+        else{
+            //log.info(usrDAO.getPasswordByUsername(authPayload.username).get());
+            if (usrDAO.getPasswordByUsername(authPayload.username).get().equals(authPayload.password)){
+                return ResponseEntity.ok("ok");
+            }
+            else return  ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Wrong password");
+        }
     }
 
     @PostMapping(path="/favouriteRecipe/{usrUUID}/{recipeUUID}")

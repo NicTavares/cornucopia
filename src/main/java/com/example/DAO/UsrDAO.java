@@ -67,6 +67,18 @@ public class UsrDAO implements DAO<Usr>{
         return Optional.ofNullable(u);
     }
 
+
+    public Optional<String> getPasswordByUsername(String username) {
+        String sql = "SELECT password FROM Usr WHERE username = ?";
+        String u = null;
+        try{
+            u = jdbcTemplate.queryForObject(sql, String.class, username);
+        }catch(DataAccessException e) {
+            System.out.println(e.getMessage());
+        }
+        return Optional.ofNullable(u);
+    }
+
     @Override
     public void update(Usr usr, String id) {
         String sql = "UPDATE Usr SET UUID = ?, birthday = ?, email = ?, username = ?, name = ?, password = ?, city = ?, postalCode = ? " +
