@@ -110,10 +110,10 @@ public class RecipeController {
 
     }
 
-    @PostMapping(path = "/postComment")
-    public ResponseEntity postComment(@RequestBody RecipePayload recipePayload) {
-
-    }
+//    @PostMapping(path = "/postComment")
+//    public ResponseEntity postComment(@RequestBody RecipePayload recipePayload) {
+//
+//    }
 
 
 
