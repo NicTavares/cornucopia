@@ -40,7 +40,8 @@ public class UsrController
         usr.setUUID(usrDAO.geNextUUID());
         usrDAO.create(usr);
 
-        return ResponseEntity.ok("New usr added");
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body("new user added ");
     }
 
     @PutMapping(path="/updateUsr/{UUID}")
