@@ -6,6 +6,10 @@ public class Administrator {
     private String password;
     private String email;
 
+    public Administrator()
+    {
+        super();
+    }
     public Administrator(int UUID,
                          int adminLevel,
                          String password,

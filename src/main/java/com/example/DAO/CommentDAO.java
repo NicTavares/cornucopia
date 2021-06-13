@@ -3,13 +3,15 @@ package com.example.DAO;
 import com.example.models.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
-public class CommentDAO implements DAO<Comment>{
+@Component
+public class CommentDAO {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -22,15 +24,15 @@ public class CommentDAO implements DAO<Comment>{
         return c;
     };
 
-    @Override
+
     public List<Comment> list() {
-        String sql = "SELECT * FROM Comments";
+        String sql = "SELECT * FROM Comment";
         return jdbcTemplate.query(sql, rowMapper);
     }
 
-    @Override
+
     public void create(Comment comment) {
-        String sql = "INSERT INTO Comments(recipeUUID, commentNumber, text, authorUUID) values(?, ?, ?, ?)";
+        String sql = "INSERT INTO Comment(recipeUUID, commentNumber, text, authorUUID) values(?, ?, ?, ?)";
         int rows = jdbcTemplate.update(sql,
                 comment.getRecipeUUID(),
                 comment.getCommentNumber(),
@@ -39,26 +41,33 @@ public class CommentDAO implements DAO<Comment>{
         );
     }
 
-    @Override
-    public Optional<Comment> get(String id) {
-        String sql = "SELECT * FROM Comments WHERE commentNumber = ? AND recipeUUID = ?";
-        String[] keys = id.split(" ");
-        Comment c = null;
-        try{
-            c = jdbcTemplate.queryForObject(sql, rowMapper, keys[0], keys[1]);
+
+    public List<Comment> getComment(String recipeUUID) {
+        String sql = "SELECT * FROM Comment WHERE recipeUUID = ?";
+
+        List<Comment> c = null;
+        try {
+            c = jdbcTemplate.query(sql, rowMapper, recipeUUID);
         } catch (DataAccessException e) {
             System.out.println(e.getMessage());
         }
-        return Optional.ofNullable(c);
+        return c;
     }
 
-    @Override
-    public void update(Comment comment, String id) {
+    public int getNextCommentNumber(String recipeUUID) {
+
+
+        String sql = "SELECT MAX(commentNumber) FROM Comment WHERE recipeUUID = ?";
+
+
+        if( jdbcTemplate.queryForObject(sql, Integer.class, recipeUUID)==null){
+            return 0;
+        }
+        else{
+            return jdbcTemplate.queryForObject(sql, Integer.class, recipeUUID) + 1;
+        }
+
 
     }
 
-    @Override
-    public void delete(String id) {
-
-    }
 }

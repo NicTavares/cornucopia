@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html>
-<script type="text/javascript" src="/index.js"></script>
+<html lang="en">
+<head>
+    <title>Cornucopia</title>
+    <link rel='stylesheet' href="./style.css"/>
+<!--    <script src="./global.js"></script>-->
+    <script type="text/javascript">
+        window.onload = async function getRecipes() {
+            const response = await fetch('http://localhost:8080/getAllRecipe', {method: 'GET'});
+            const recipeList = await response.json();
+
+            let cols = [];
+            // Push all keys to the array
+            for (let k in recipeList[0]){
+                cols.push(k);
+            }
+
+            var table = document.createElement("table");
+
+            // add header row
+            var headerRow = table.insertRow(-1);
+            for (var i = 0; i < cols.length; i++) {
+                var theader = document.createElement("th"); // header cell
+                theader.innerHTML = cols[i];
+                headerRow.appendChild(theader); // Append columnName to the table row
+            }
+
+            // Adding the data to the table
+            for (let i = 0; i < recipeList.length; i++) {
+                tableRow = table.insertRow(-1);
+                for (let j = 0; j < cols.length; j++) {
+                    let cell = tableRow.insertCell(-1);
+                    cell.innerHTML = recipeList[i][cols[j]];
+                }
+            }
+
+            // add the table to the page
+            var el = document.getElementById("table");
+            el.innerHTML = "";
+            el.appendChild(table);
+        }
+    </script>
+</head>
 <body>
-
-<h1>Recipes Website</h1><br>
-<button type="submit" onclick="userAction()">Get All Users</button>
-
+    <nav>
+        <a href="/uploadRecipe">Add a Recipe!</a> |
+        <a href="loginPage.html">Login</a> |
+        <a href="/signup">Create an account</a>
+    </nav>
+    <h1>Cornucopia</h1>
+    <p>Welcome to Cornucopia, your recipe centre!</p>
+    <table id="table" align = "center" border="1px"></table>
 </body>
+
 </html>

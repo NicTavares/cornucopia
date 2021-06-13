@@ -53,8 +53,9 @@ public class TagDAO implements DAO<Tag>{
     }
 
     @Override
-    public void delete(String id) {
+    public int delete(String id) {
         String sql = "DELETE TAG Where name = ?";
         int rows = jdbcTemplate.update(sql, id);
+        return rows;
     }
 }

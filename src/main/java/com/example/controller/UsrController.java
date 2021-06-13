@@ -34,15 +34,16 @@ public class UsrController
         return  usrDAO.get(Integer.toString(UUID));
     }
 
-    @PostMapping(path="/addUsr")
-    public ResponseEntity addUsr(@RequestBody Usr usr)
-    {
-        usr.setUUID(usrDAO.geNextUUID());
-        usrDAO.create(usr);
-
-        return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body("new user added ");
-    }
+//    @PostMapping(path="/addUsr")
+//    public ResponseEntity addUsr(@ModelAttribute Usr usr)
+//    {
+//        usr.setUUID(usrDAO.geNextUUID());
+//        System.out.println(usr);
+//        usrDAO.create(usr);
+//
+//        return ResponseEntity.status(HttpStatus.ACCEPTED)
+//                .body("new user added ");
+//    }
 
     @PutMapping(path="/updateUsr/{UUID}")
     public ResponseEntity<String> updateUsr(@RequestBody Usr usr, @PathVariable int UUID)
@@ -93,10 +94,9 @@ public class UsrController
         return usrDAO.getFavouriteRecipes(UUID);
     }
 //
-//Test request body:
+//Test add request body:
 //    {
 //        "UUID":10,
-//            "birthday":"1994-02-01",
 //            "email":"test@gmail.com",
 //            "username":"testusr",
 //            "name":"Test One",
