@@ -5,6 +5,7 @@ import com.example.models.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,11 @@ public class RecipeController {
     EquipmentDAO equipmentDAO;
     @Autowired
     TechniqueDAO techniqueDAO;
+
+    @Autowired
+    RatingDAO ratingDAO;
+    @Autowired
+    CommentDAO commentDAO;
     private static final Logger log = LoggerFactory.getLogger(RecipeController.class);
 
     @GetMapping(path = "/getAllRecipe")
@@ -41,6 +47,7 @@ public class RecipeController {
         recipeDAO.create(recipe);
         return ResponseEntity.ok("New recipe added");
     }
+
 
 
 //    static class RecipePayload {
@@ -102,6 +109,23 @@ public class RecipeController {
 //        return ResponseEntity.ok("New recipe added");
 //    }
 
+
+
+    static class UsrRateRecipePayload {
+        public int usrUUID;
+        public int recipeUUID;
+        public int score;
+    }
+
+    @PostMapping(path = "/usrRateRecipe")
+    public ResponseEntity usrRateRecipe(@RequestBody UsrRateRecipePayload usrRateRecipePayload) {
+        log.info(String.format("%d",usrRateRecipePayload.usrUUID));
+        log.info(String.format("%d",usrRateRecipePayload.recipeUUID));
+        ratingDAO.create(usrRateRecipePayload.usrUUID,usrRateRecipePayload.recipeUUID,usrRateRecipePayload.score);
+        recipeDAO.updateScore(Integer.toString(usrRateRecipePayload.recipeUUID),ratingDAO.getScore(usrRateRecipePayload.recipeUUID));
+        return ResponseEntity.ok("rated successfully");
+    }
+
 //    static class commentPayload {
 //        int commenterUUID;
 //        int recipeUUID;
@@ -110,12 +134,20 @@ public class RecipeController {
 //
 //    }
 
-//    @PostMapping(path = "/postComment")
-//    public ResponseEntity postComment(@RequestBody RecipePayload recipePayload) {
-//
-//    }
 
+    @PostMapping(path = "/postComment")
+    public ResponseEntity postComment(@RequestBody Comment comment) {
+        comment.setCommentNumber(commentDAO.getNextCommentNumber(Integer.toString(comment.getRecipeUUID())));
+        commentDAO.create(comment);
 
+        return ResponseEntity.ok("commented successfully");
+    }
+
+    @GetMapping(path = "/getComment/{recipeUUID}")
+    public List<Comment> getComment(@PathVariable int recipeUUID) {
+        return commentDAO.getComment(Integer.toString(recipeUUID));
+
+    }
 
 
 //{
@@ -126,5 +158,5 @@ public class RecipeController {
 //    "estimatedTime":15,
 //    "uploaderUUID":11111
 //}
-    
-}
+
+    }

@@ -82,7 +82,13 @@ public class RecipeDAO implements DAO<Recipe>{
 
     public int getNextUUID() {
         String sql = "SELECT MAX(UUID) FROM Recipe";
-        return jdbcTemplate.queryForObject(sql, Integer.class )+1;
+        if(jdbcTemplate.queryForObject(sql, Integer.class )==null){
+            return 0;
+        }
+        else {
+            return jdbcTemplate.queryForObject(sql, Integer.class )+1;
+        }
+
 
     }
 
@@ -102,14 +108,25 @@ public class RecipeDAO implements DAO<Recipe>{
     public void createRecipeEquipment(int recipeUUID,String equipmentName) {
         String sql = "INSERT INTO RecipeHasEquipment(UUID, name) values(?,?)";
         int rows = jdbcTemplate.update(sql,
-                recipeUUID,equipmentName
+                recipeUUID, equipmentName
         );
     }
-    public void createRecipeTechnique(int recipeUUID,String techniqueName) {
+
+    public void createRecipeTechnique(int recipeUUID, String techniqueName) {
         String sql = "INSERT INTO RecipeHasTechnique(UUID, name) values(?,?)";
         int rows = jdbcTemplate.update(sql,
-                recipeUUID,techniqueName
+                recipeUUID, techniqueName
         );
     }
+
+
+    public void updateScore(String recipeUUID, int score) {
+        String sql = "UPDATE Recipe SET averageScore = ? WHERE UUID = ?";
+        int rows = jdbcTemplate.update(sql,
+                score,
+                Integer.parseInt(recipeUUID)
+        );
+    }
+
 
 }

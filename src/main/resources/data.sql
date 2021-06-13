@@ -32,8 +32,9 @@ VALUES  (11111,'nic.tavares22@gmail.com', 'nic_tavares', 'Nic Tavares', '12345',
 		(11113, 'yuan@gmail.com', 'yuan', 'Yuan Gao', '12345','Van','V5R1A1'),
 		(11114, 'polly@gmail.com', 'polly', 'Polly', '12345','Van','V5R1A1'),
 		(11115, 'phoebe@gmail.com', 'phoebe', 'Phoebe', '12345','Van','V5R1A1'),
-		(11116, 'markus@gmail.com', 'markkk', 'Markus Naslund', '12345','Van','V5R1A1'),
-		(11117, 'hedy@gmail.com', 'hedy', 'Hedy Lamarr', 'e544785f-??','Van','V5R1A1');
+		(11116,'markus@gmail.com', 'markkk', 'Markus Naslund', '12345','Van','V5R1A1'),
+		(11117,'hedy@gmail.com', 'hedy', 'Hedy Lamarr', 'e544785f-??','Van','V5R1A1');
+
 		
 INSERT INTO Recipe(UUID, name, text, averageScore, estimatedTime, uploaderUUID) 
 VALUES  (00001, 'Parmesan chicken', "Cut the chicken...", 4.5, 13, 11111),
@@ -48,13 +49,7 @@ VALUES  (11111, 1, '12345','admin+1@gmail.com'),
 		(11113, 1, '12345', 'admin+3@gmail.com'),
 		(11114, 2, '12345','admin+4@gmail.com'),
 		(11115, 3, '12345', 'admin+5@gmail.com');
-		
-INSERT INTO Comments(recipeUUID, commentNumber, text, authorUUID) 
-VALUES  (00001, 1, 'First', 11111),
-		(00003, 2, 'Noice', 11114),
-		(00001, 3, 'Second', 11114),
-		(00004, 4, 'nice recipe :)', 11116),
-		(00004, 1, 'First', 11116);
+
 		
 INSERT INTO UsrFavouriteRecipe(usrUUID,recipeUUID)
 VALUES  ( 11111,1),
@@ -89,3 +84,17 @@ VALUES (11114, "fish", 1),
 (11115, "potato", 3),
 (11112, "chicken", 2),
 (11112, "potato", 4);
+
+INSERT INTO UsrRateRecipe (usrUUID, recipeUUID, score) VALUES
+(11111, 1,7),
+(11114, 2,5),
+(11114, 3,7),
+(11112, 4,9),
+(11113, 5,8);
+
+INSERT INTO Comment(recipeUUID, commentNumber, text, authorUUID)
+VALUES  (1, 1, 'nice', 11111),
+		(3, 2, 'Noice', 11114),
+		(1, 3, 'bad', 11114),
+		(4, 4, 'nice recipe :)', 11115),
+		(4, 1, 'not good', 11115);

@@ -65,6 +65,18 @@ public class UsrDAO implements DAO<Usr>{
         return Optional.ofNullable(u);
     }
 
+
+    public Optional<String> getPasswordByUsername(String username) {
+        String sql = "SELECT password FROM Usr WHERE username = ?";
+        String u = null;
+        try{
+            u = jdbcTemplate.queryForObject(sql, String.class, username);
+        }catch(DataAccessException e) {
+            System.out.println(e.getMessage());
+        }
+        return Optional.ofNullable(u);
+    }
+
     @Override
     public void update(Usr usr, String id) {
         String sql = "UPDATE Usr SET UUID = ?, email = ?, username = ?, name = ?, password = ?, city = ?, postalCode = ? " +
@@ -88,7 +100,11 @@ public class UsrDAO implements DAO<Usr>{
     }
     public int geNextUUID() {
         String sql = "SELECT MAX(UUID) FROM Usr";
-        return jdbcTemplate.queryForObject(sql, Integer.class )+1;
+
+        if(jdbcTemplate.queryForObject(sql, Integer.class )==null){
+            return 0;
+        }
+        else return jdbcTemplate.queryForObject(sql, Integer.class )+1;
 
     }
 

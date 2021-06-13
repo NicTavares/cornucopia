@@ -32,7 +32,7 @@ public class Usr {
         this.city = city;
         this.postalCode = postalCode;
     }
-
+  
     public void setEmail(String email) {
         this.email = email;
     }
@@ -56,7 +56,6 @@ public class Usr {
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
-
     public int getUUID() {
         return UUID;
     }
