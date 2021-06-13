@@ -48,13 +48,7 @@ VALUES  (11111, 1, '12345','admin+1@gmail.com'),
 		(11113, 1, '12345', 'admin+3@gmail.com'),
 		(11114, 2, '12345','admin+4@gmail.com'),
 		(11115, 3, '12345', 'admin+5@gmail.com');
-		
-INSERT INTO Comments(recipeUUID, commentNumber, text, authorUUID) 
-VALUES  (00001, 1, 'First', 11111),
-		(00003, 2, 'Noice', 11114),
-		(00001, 3, 'Second', 11114),
-		(00004, 4, 'nice recipe :)', 11116),
-		(00004, 1, 'First', 11116);
+
 		
 INSERT INTO UsrFavouriteRecipe(usrUUID,recipeUUID)
 VALUES  ( 11111,1),
@@ -96,3 +90,10 @@ INSERT INTO UsrRateRecipe (usrUUID, recipeUUID, score) VALUES
 (11114, 3,7),
 (11112, 4,9),
 (11113, 5,8);
+
+INSERT INTO Comment(recipeUUID, commentNumber, text, authorUUID)
+VALUES  (1, 1, 'nice', 11111),
+		(3, 2, 'Noice', 11114),
+		(1, 3, 'bad', 11114),
+		(4, 4, 'nice recipe :)', 11115),
+		(4, 1, 'not good', 11115);
