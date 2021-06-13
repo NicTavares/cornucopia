@@ -1,9 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <title>Cornucopia</title>
+    <link rel='stylesheet' href="./style.css"/>
+<!--    <script src="./global.js"></script>-->
+    <script type="text/javascript">
+        window.onload = async function getRecipes() {
+            const response = await fetch('http://localhost:8080/getAllRecipe', {method: 'GET'});
+            const jsonResponse = await response.json();
+
+            // let html = "";
+            // const recipes = JSON.parse(jsonResponse);
+            // for (var i = 0; i < recipes.length; i++){
+            //     document.write("<br><br>array index: " + i);
+            //     var obj = recipes[i];
+            //     for (var key in obj){
+            //         var value = obj[key];
+            //         document.write("<br> - " + key + ": " + value);
+            //     }
+            // }
+
+            document.getElementById('recipeData').innerHTML = JSON.stringify(jsonResponse);
+        }
+    </script>
+</head>
 <body>
+    <nav>
+        <a href="recipeAdder.html">Add a Recipe!</a> |
+        <a href="loginPage.html">Login</a> |
+        <a href="accountCreationPage.html">Create an account</a>
+    </nav>
 
-<h1>Recipes Website</h1>
-
-
+    <h1>Cornucopia</h1>
+    <p>Welcome to Cornucopia, your recipe centre!</p>
+    <p id="recipeData">Fetching recipes...</p>
 </body>
+
 </html>
