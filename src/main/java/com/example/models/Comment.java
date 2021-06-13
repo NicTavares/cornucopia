@@ -3,7 +3,7 @@ package com.example.models;
 public class Comment {
     private int recipeUUID;
     private int commentNumber;
-        private String text;
+    private String text;
     private int authorUUID;
 
     public Comment(int recipeUUID, int commentNumber, String text, int authorUUID) {
