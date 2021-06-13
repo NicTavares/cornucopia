@@ -26,14 +26,14 @@ VALUES  ('beef'),
 		('potato'),
 		('fish');
 
-INSERT INTO Usr (UUID, birthday, email, username, name, password,city,postalCode)
-VALUES  (11111, '1994-03-01','nic.tavares22@gmail.com', 'nic_tavares', 'Nic Tavares', '12345','Van','V5R1A1'),
-		(11112, '1994-02-01', 'gloria@gmail.com', 'gloria', 'Gloria Zhang', '12345','Van','V5R1A1'),
-		(11113, '1994-01-01', 'yuan@gmail.com', 'yuan', 'Yuan Gao', '12345','Van','V5R1A1'),
-		(11114, '1993-12-01', 'polly@gmail.com', 'polly', 'Polly', '12345','Van','V5R1A1'),
-		(11115, '1993-11-01', 'phoebe@gmail.com', 'phoebe', 'Phoebe', '12345','Van','V5R1A1'),
-		(11116, '1967-5-23', 'markus@gmail.com', 'markkk', 'Markus Naslund', '12345','Van','V5R1A1'),
-		(11117, '1989-7-05', 'hedy@gmail.com', 'hedy', 'Hedy Lamarr', 'e544785f-??','Van','V5R1A1');
+INSERT INTO Usr (UUID, email, username, name, password,city,postalCode)
+VALUES  (11111,'nic.tavares22@gmail.com', 'nic_tavares', 'Nic Tavares', '12345','Van','V5R1A1'),
+		(11112, 'gloria@gmail.com', 'gloria', 'Gloria Zhang', '12345','Van','V5R1A1'),
+		(11113, 'yuan@gmail.com', 'yuan', 'Yuan Gao', '12345','Van','V5R1A1'),
+		(11114, 'polly@gmail.com', 'polly', 'Polly', '12345','Van','V5R1A1'),
+		(11115, 'phoebe@gmail.com', 'phoebe', 'Phoebe', '12345','Van','V5R1A1'),
+		(11116,'markus@gmail.com', 'markkk', 'Markus Naslund', '12345','Van','V5R1A1'),
+		(11117,'hedy@gmail.com', 'hedy', 'Hedy Lamarr', 'e544785f-??','Van','V5R1A1');
 		
 INSERT INTO Recipe(UUID, name, text, averageScore, estimatedTime, uploaderUUID) 
 VALUES  (00001, 'Parmesan chicken', "Cut the chicken...", 4.5, 13, 11111),
