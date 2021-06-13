@@ -1,6 +1,4 @@
 package com.example.DAO;
-
-import com.example.models.Course;
 import com.example.models.Ingredient;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;

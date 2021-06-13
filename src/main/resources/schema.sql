@@ -32,7 +32,6 @@ CREATE TABLE Technique (
 
 CREATE TABLE Usr (
        UUID INT PRIMARY KEY,
-       birthday DATE,
        email VARCHAR(255) NOT NULL,
        username VARCHAR(255) NOT NULL,
        name VARCHAR(255) NOT NULL,
