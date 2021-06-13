@@ -92,10 +92,9 @@ public class UsrController
         return usrDAO.getFavouriteRecipes(UUID);
     }
 //
-//Test request body:
+//Test add request body:
 //    {
 //        "UUID":10,
-//            "birthday":"1994-02-01",
 //            "email":"test@gmail.com",
 //            "username":"testusr",
 //            "name":"Test One",

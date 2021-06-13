@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Usr {
 
     private  int UUID;
-    private  Date birthday;
+
     private  String email;
     private  String username;
     private  String name;
@@ -14,7 +14,7 @@ public class Usr {
     private  String postalCode;
 
     public Usr(int UUID,
-                Date birthday,
+
                 String email,
                 String username,
                 String name,
@@ -23,17 +23,13 @@ public class Usr {
                 String postalCode) {
 
         this.UUID = UUID;
-        this.birthday = birthday;
+
         this.email = email;
         this.username = username;
         this.name = name;
         this.password = password;
         this.city = city;
         this.postalCode = postalCode;
-    }
-
-    public Date getBirthday() {
-        return birthday;
     }
 
     public int getUUID() {
