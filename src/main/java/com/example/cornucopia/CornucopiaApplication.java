@@ -59,24 +59,5 @@ public class CornucopiaApplication implements CommandLineRunner{
 //        ).forEach(equ -> log.info("test1:equ"+equ.getName()+" exists"));
     }
 
-    @GetMapping("/hello")
-    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return String.format("Hello %s!", name);
-    }
-
-    @GetMapping("/all_equ")
-    public String showAllEquipments() {
-        List<String> names = new ArrayList<>();
-        jdbcTemplate.query(
-                "SELECT * FROM equipment ", (rs, rowNum) -> new Equipment(rs.getString("name"))
-        ).forEach(equ -> names.add(equ.getName()));
-        names.forEach(name->log.info("test2"+name));
-
-        String ret = "We have:"+String.join(", ", names)+ ":)!";
-
-        return String.format("%s!", ret);
-    }
-
-
 
 }

@@ -34,6 +34,7 @@ VALUES  (11111,'nic.tavares22@gmail.com', 'nic_tavares', 'Nic Tavares', '12345',
 		(11115, 'phoebe@gmail.com', 'phoebe', 'Phoebe', '12345','Van','V5R1A1'),
 		(11116,'markus@gmail.com', 'markkk', 'Markus Naslund', '12345','Van','V5R1A1'),
 		(11117,'hedy@gmail.com', 'hedy', 'Hedy Lamarr', 'e544785f-??','Van','V5R1A1');
+
 		
 INSERT INTO Recipe(UUID, name, text, averageScore, estimatedTime, uploaderUUID) 
 VALUES  (00001, 'Parmesan chicken', "Cut the chicken...", 4.5, 13, 11111),
