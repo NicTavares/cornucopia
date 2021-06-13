@@ -103,7 +103,11 @@ public class UsrDAO implements DAO<Usr>{
     }
     public int geNextUUID() {
         String sql = "SELECT MAX(UUID) FROM Usr";
-        return jdbcTemplate.queryForObject(sql, Integer.class )+1;
+
+        if(jdbcTemplate.queryForObject(sql, Integer.class )==null){
+            return 0;
+        }
+        else return jdbcTemplate.queryForObject(sql, Integer.class )+1;
 
     }
 

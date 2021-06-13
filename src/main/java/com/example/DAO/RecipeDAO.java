@@ -82,7 +82,13 @@ public class RecipeDAO implements DAO<Recipe>{
 
     public int getNextUUID() {
         String sql = "SELECT MAX(UUID) FROM Recipe";
-        return jdbcTemplate.queryForObject(sql, Integer.class )+1;
+        if(jdbcTemplate.queryForObject(sql, Integer.class )==null){
+            return 0;
+        }
+        else {
+            return jdbcTemplate.queryForObject(sql, Integer.class )+1;
+        }
+
 
     }
 

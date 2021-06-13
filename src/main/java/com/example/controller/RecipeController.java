@@ -5,6 +5,7 @@ import com.example.models.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,8 @@ public class RecipeController {
 
     @Autowired
     RatingDAO ratingDAO;
+    @Autowired
+    CommentDAO commentDAO;
     private static final Logger log = LoggerFactory.getLogger(RecipeController.class);
 
     @GetMapping(path = "/getAllRecipe")
@@ -142,10 +145,19 @@ public class RecipeController {
 //
 //    }
 
-//    @PostMapping(path = "/postComment")
-//    public ResponseEntity postComment(@RequestBody RecipePayload recipePayload) {
-//
-//    }
+    @PostMapping(path = "/postComment")
+    public ResponseEntity postComment(@RequestBody Comment comment) {
+        comment.setCommentNumber(commentDAO.getNextCommentNumber(Integer.toString(comment.getRecipeUUID())));
+        commentDAO.create(comment);
+
+        return ResponseEntity.ok("commented successfully");
+    }
+
+    @GetMapping(path = "/getComment/{recipeUUID}")
+    public List<Comment> getComment(@PathVariable int recipeUUID) {
+        return commentDAO.getComment(Integer.toString(recipeUUID));
+
+    }
 
 
 //{
