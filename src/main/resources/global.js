@@ -20,12 +20,12 @@
 //
 // app.listen(port)
 // console.log("listening to server on port:", port);
-window.addEventListener('DOMContentLoaded', async function(){
-    const player = await fetchAllRecipes();
-    fillPlayerData(player);
-});
-
-async function fetchAllRecipes(){
-    const json = await requestData('https://localhost/getAllUsr', {method: "GET"});
-    //document.getElementById('recipeData') = JSON.stringify(json);
-}
+// window.addEventListener('DOMContentLoaded', async function(){
+//     const player = await fetchAllRecipes();
+//     fillPlayerData(player);
+// });
+//
+// async function fetchAllRecipes(){
+//     const json = await requestData('https://localhost/getAllUsr', {method: "GET"});
+//     //document.getElementById('recipeData') = JSON.stringify(json);
+// }

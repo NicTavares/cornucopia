@@ -7,20 +7,37 @@
     <script type="text/javascript">
         window.onload = async function getRecipes() {
             const response = await fetch('http://localhost:8080/getAllRecipe', {method: 'GET'});
-            const jsonResponse = await response.json();
+            const recipeList = await response.json();
 
-            // let html = "";
-            // const recipes = JSON.parse(jsonResponse);
-            // for (var i = 0; i < recipes.length; i++){
-            //     document.write("<br><br>array index: " + i);
-            //     var obj = recipes[i];
-            //     for (var key in obj){
-            //         var value = obj[key];
-            //         document.write("<br> - " + key + ": " + value);
-            //     }
-            // }
+            let cols = [];
+            // Push all keys to the array
+            for (let k in recipeList[0]){
+                cols.push(k);
+            }
 
-            document.getElementById('recipeData').innerHTML = JSON.stringify(jsonResponse);
+            var table = document.createElement("table");
+
+            // add header row
+            var headerRow = table.insertRow(-1);
+            for (var i = 0; i < cols.length; i++) {
+                var theader = document.createElement("th"); // header cell
+                theader.innerHTML = cols[i];
+                headerRow.appendChild(theader); // Append columnName to the table row
+            }
+
+            // Adding the data to the table
+            for (let i = 0; i < recipeList.length; i++) {
+                tableRow = table.insertRow(-1);
+                for (let j = 0; j < cols.length; j++) {
+                    let cell = tableRow.insertCell(-1);
+                    cell.innerHTML = recipeList[i][cols[j]];
+                }
+            }
+
+            // add the table to the page
+            var el = document.getElementById("table");
+            el.innerHTML = "";
+            el.appendChild(table);
         }
     </script>
 </head>
@@ -33,7 +50,7 @@
 
     <h1>Cornucopia</h1>
     <p>Welcome to Cornucopia, your recipe centre!</p>
-    <p id="recipeData">Fetching recipes...</p>
+    <table id="table" align = "center" border="1px"></table>
 </body>
 
 </html>
