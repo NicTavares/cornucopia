@@ -75,9 +75,10 @@ public class RecipeDAO implements DAO<Recipe>{
     }
 
     @Override
-    public void delete(String id) {
+    public int delete(String id) {
         String sql = "DELETE Recipe WHERE UUID = ?";
         int rows = jdbcTemplate.update(sql, rowMapper, id);
+        return rows;
     }
 
     public int getNextUUID() {

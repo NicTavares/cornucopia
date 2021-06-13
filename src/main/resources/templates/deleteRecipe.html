@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Recipe</title>
+</head>
+<body>
+<h4>Please Enter the UUID of the recipe to delete</h4>
+<form th:action="@{/d}"  method="post">
+  <p>Recipe UUID: <input type="text" th:value="${sourceText}"  name="recipeID"/></p>
+  <input type="submit" />
+</form>
+
+</body>
+</html>
