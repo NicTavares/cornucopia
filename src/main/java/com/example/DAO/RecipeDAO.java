@@ -1,11 +1,13 @@
 package com.example.DAO;
 
-import com.example.models.Recipe;
+import com.example.models.*;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -134,6 +136,54 @@ public class RecipeDAO implements DAO<Recipe>{
                 score,
                 Integer.parseInt(recipeUUID)
         );
+    }
+
+    RowMapper<RecipeTag> tagMapper = (rs, rowNum) -> {
+        RecipeTag t = new RecipeTag();
+        t.setName(rs.getString("name"));
+        t.setUUID(rs.getInt("UUID"));
+        return t;
+    };
+
+    public List<RecipeTag> getTagsByRecipe(String UUID) {
+        String sql = "SELECT * FROM RecipeHasTags WHERE UUID = ?";
+        return jdbcTemplate.query(sql, tagMapper, UUID);
+    }
+
+    RowMapper<RecipeIngredient> ingredientMapper = (rs, rowNum) -> {
+        RecipeIngredient t = new RecipeIngredient();
+        t.setName(rs.getString("name"));
+        t.setUUID(rs.getInt("UUID"));
+        return t;
+    };
+
+    public List<RecipeIngredient> getIngredientsByRecipe(String UUID) {
+        String sql = "SELECT * FROM RecipeHasIngredients WHERE UUID = ?";
+        return jdbcTemplate.query(sql, ingredientMapper, UUID);
+    }
+
+    RowMapper<RecipeEquipment> eqMapper = (rs, rowNum) -> {
+        RecipeEquipment t = new RecipeEquipment();
+        t.setName(rs.getString("name"));
+        t.setUUID(rs.getInt("UUID"));
+        return t;
+    };
+
+    public List<RecipeEquipment> getEquipmentByRecipe(String UUID) {
+        String sql = "SELECT * FROM RecipeHasEquipment WHERE UUID = ?";
+        return jdbcTemplate.query(sql, eqMapper, UUID);
+    }
+
+    RowMapper<RecipeTechnique> tecMapper = (rs, rowNum) -> {
+        RecipeTechnique t = new RecipeTechnique();
+        t.setName(rs.getString("name"));
+        t.setUUID(rs.getInt("UUID"));
+        return t;
+    };
+
+    public List<RecipeTechnique> getTechniqueByRecipe(String UUID) {
+        String sql = "SELECT * FROM RecipeHasTechnique WHERE UUID = ?";
+        return jdbcTemplate.query(sql, tecMapper, UUID);
     }
 
 
