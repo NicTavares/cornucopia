@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Info</title>
+    <script type="text/javascript">
+        window.onload = async function populatePage() {
+            var uuid = getUrlParameter("uuid");
+            const response = await fetch('http://localhost:8080/getRecipe/'+uuid, {method: 'GET'});
+            const recipe = await response.json();
+
+            let cols = [];
+            for (let k in recipe){ cols.push(k);}
+            let nameInd = cols.indexOf("name");
+            let titleEl=document.getElementById("title");
+            titleEl.innerHTML = recipe[cols[nameInd]];
+
+            // populate recipe table
+            let el = document.getElementById("recipeTable");
+            el.innerHTML = "";
+            el.appendChild(createTable([recipe]));
+
+            // populate comments table
+            const response2 = await fetch('http://localhost:8080/getComment/'+uuid, {method: 'GET'});
+            const comments = await response2.json();
+            el = document.getElementById("commentsTable");
+            el.innerHTML = "";
+            el.appendChild(createTable(comments));
+        };
+
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        function createTable(jsonObjList) {
+            if (jsonObjList.length == 0) {return;}
+            let cols = [];
+            for (let k in jsonObjList[0]){ cols.push(k);} // Push all keys to the array
+
+            var table = document.createElement("table");
+
+            // add header row
+            var headerRow = table.insertRow(-1);
+            for (var i = 0; i < cols.length; i++) {
+                var theader = document.createElement("th"); // header cell
+                theader.innerHTML = cols[i];
+                headerRow.appendChild(theader); // Append columnName to the table row
+            }
+
+            // Adding the data to the table
+            for (let i = 0; i < jsonObjList.length; i++) {
+                tableRow = table.insertRow(-1);
+                for (let j = 0; j < cols.length; j++) {
+                    let cell = tableRow.insertCell(-1);
+                    cell.innerHTML = jsonObjList[i][cols[j]];
+                }
+            }
+
+            return table;
+        }
+    </script>
+</head>
+<body>
+<h1 id="title"></h1>
+<table id="recipeTable" border="1px"></table>
+<h2>Comments</h2>
+<table id="commentsTable" border="1px"></table>
+</body>
+</html>
