@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
@@ -35,7 +36,8 @@ public class UploadRecipeController {
     @PostMapping("/uploadRecipe")
     public String greetingSubmit(@ModelAttribute RecipePayload recipe, Model model) {
         Recipe newRecipe = recipe.getRecipe();
-        newRecipe.setUUID(recipeDAO.getNextUUID());
+        int currentUUID=recipeDAO.getNextUUID();
+        newRecipe.setUUID(currentUUID);
         recipeDAO.create(newRecipe);
 
         String[] tags = recipe.getTags().split(",");
@@ -45,6 +47,7 @@ public class UploadRecipeController {
                 Tag temp = new Tag(tags[i]);
                 tagDAO.create(temp);
             }
+            recipeDAO.createRecipeTag(currentUUID,tags[i]);
         }
         String[] ingredients = recipe.getIngredients().split(",");
         for(int i = 0; i < ingredients.length; i++) {
@@ -53,14 +56,16 @@ public class UploadRecipeController {
                 Ingredient ingredient = new Ingredient(ingredients[i]);
                 ingredientDAO.create(ingredient);
             }
+            recipeDAO.createRecipeIngredient(currentUUID,ingredients[i]);
         }
-        String[] equipment = recipe.getEquipment().split(",");
-        for(int i = 0; i < equipment.length; i++) {
-            Optional<Equipment> eq = equipmentDAO.get(equipment[i]);
+        String[] equipments = recipe.getEquipment().split(",");
+        for(int i = 0; i < equipments.length; i++) {
+            Optional<Equipment> eq = equipmentDAO.get(equipments[i]);
             if(eq.isEmpty()) {
-                Equipment e = new Equipment(equipment[i]);
+                Equipment e = new Equipment(equipments[i]);
                 equipmentDAO.create(e);
             }
+            recipeDAO.createRecipeEquipment(currentUUID,equipments[i]);
         }
         String[] techniques = recipe.getTechniques().split(",");
         for(int i = 0; i < techniques.length; i++){
@@ -69,9 +74,8 @@ public class UploadRecipeController {
                 Technique tech = new Technique(techniques[i], recipe.getDifficulty());
                 techniqueDAO.create(tech);
             }
+            recipeDAO.createRecipeTechnique(currentUUID,techniques[i]);
         }
         return "success";
     }
-
-
 }

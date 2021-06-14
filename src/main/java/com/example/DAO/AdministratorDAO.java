@@ -66,9 +66,10 @@ public class AdministratorDAO implements DAO<Administrator>{
     }
 
     @Override
-    public void delete(String id) {
+    public int delete(String id) {
         String sql = "DELETE FROM Administrator WHERE UUID = ?";
         int update = jdbcTemplate.update(sql, id, rowMapper);
+        return update;
     }
 
 

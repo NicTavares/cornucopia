@@ -69,8 +69,9 @@ public class MessageDAO implements DAO<Message> {
     }
 
     @Override
-    public void delete(String id) {
+    public int delete(String id) {
         String sql = "DELETE Message WHERE UUID = ?";
         int rows = jdbcTemplate.update(sql, rowMapper, id);
+        return rows;
     }
 }
