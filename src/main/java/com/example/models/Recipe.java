@@ -1,6 +1,8 @@
 package com.example.models;
 
-public class Recipe {
+import java.io.Serializable;
+
+public class Recipe implements Serializable {
 
 
 
@@ -73,5 +75,17 @@ public class Recipe {
 
     public void setUUID(int UUID) {
         this.UUID = UUID;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "UUID=" + UUID +
+                ", name='" + name + '\'' +
+                ", text='" + text + '\'' +
+                ", averageScore=" + averageScore +
+                ", estimatedTime=" + estimatedTime +
+                ", uploaderUUID=" + uploaderUUID +
+                '}'+"\n";
     }
 }
