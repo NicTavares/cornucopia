@@ -41,7 +41,7 @@ public class SearchRecipeController {
 
         List<Recipe> results = recipeDAO.searchWhere(field, operator, value);
 
-        model.addAttribute("searchResult", results.toString());
+        model.addAttribute("searchResult", results);
         return "searchRecipeResult";
     }
 

@@ -1,6 +1,8 @@
 package com.example.models;
 
-public class Recipe {
+import java.io.Serializable;
+
+public class Recipe implements Serializable {
 
 
 
@@ -84,6 +86,6 @@ public class Recipe {
                 ", averageScore=" + averageScore +
                 ", estimatedTime=" + estimatedTime +
                 ", uploaderUUID=" + uploaderUUID +
-                '}';
+                '}'+"\n";
     }
 }
