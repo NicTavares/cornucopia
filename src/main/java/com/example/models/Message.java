@@ -9,13 +9,13 @@ public class Message {
     private int UUID;
     private String text;
     private int senderUUID;
-    private Date sentTime;
+    private String sentTime;
     private int receiverUUID;
 
     public Message(int UUID,
                    String text,
                    int senderUUID,
-                   Date sentTime,
+                   String sentTime,
                    int receiverUUID) {
         this.UUID = UUID;
         this.text = text;
@@ -32,7 +32,7 @@ public class Message {
         return text;
     }
 
-    public Date getSentTime() {
+    public String getSentTime() {
         return sentTime;
     }
 
@@ -42,5 +42,9 @@ public class Message {
 
     public int getSenderUUID() {
         return senderUUID;
+    }
+
+    public void setUUID(int UUID) {
+        this.UUID = UUID;
     }
 }
