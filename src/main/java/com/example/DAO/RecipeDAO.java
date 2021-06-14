@@ -34,6 +34,17 @@ public class RecipeDAO implements DAO<Recipe>{
         return jdbcTemplate.query(sql, rowMapper);
     }
 
+    public List<Recipe> searchWhere(String field, String operator, float value) {
+        String sql = "SELECT * FROM Recipe WHERE";
+        String temp = " ";
+        temp += field;
+        temp += " ";
+        temp += operator;
+        temp += " " + Float.toString(value);
+        sql += temp;
+        return jdbcTemplate.query(sql, rowMapper);
+    }
+
     @Override
     public void create(Recipe recipe) {
         String sql = "INSERT INTO Recipe(UUID, name,text, averageScore, estimatedTime, uploaderUUID) values(?,?,?,?,?,?)";
