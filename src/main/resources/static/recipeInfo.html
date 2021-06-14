@@ -5,27 +5,55 @@
     <title>Recipe Info</title>
     <script type="text/javascript">
         window.onload = async function populatePage() {
-            var uuid = getUrlParameter("uuid");
-            const response = await fetch('http://localhost:8080/getRecipe/'+uuid, {method: 'GET'});
-            const recipe = await response.json();
+            let uuid = getUrlParameter("uuid");
+            let response = await fetch('http://localhost:8080/getRecipe/'+uuid, {method: 'GET'});
+            let responseJSON = await response.json();
 
             let cols = [];
-            for (let k in recipe){ cols.push(k);}
+            for (let k in responseJSON){ cols.push(k);}
             let nameInd = cols.indexOf("name");
             let titleEl=document.getElementById("title");
-            titleEl.innerHTML = recipe[cols[nameInd]];
+            titleEl.innerHTML = responseJSON[cols[nameInd]];
 
             // populate recipe table
             let el = document.getElementById("recipeTable");
             el.innerHTML = "";
-            el.appendChild(createTable([recipe]));
+            el.appendChild(createTable([responseJSON]));
 
             // populate comments table
-            const response2 = await fetch('http://localhost:8080/getComment/'+uuid, {method: 'GET'});
-            const comments = await response2.json();
+            response = await fetch('http://localhost:8080/getComment/'+uuid, {method: 'GET'});
+            responseJSON = await response.json();
             el = document.getElementById("commentsTable");
             el.innerHTML = "";
-            el.appendChild(createTable(comments));
+            el.appendChild(createTable(responseJSON));
+
+            // populate tags table
+            response = await fetch('http://localhost:8080/getTags/'+uuid, {method: 'GET'});
+            responseJSON = await response.json();
+            el = document.getElementById("tagsTable");
+            el.innerHTML = "";
+            el.appendChild(createTable(responseJSON));
+
+            // populate ingredients table
+            response = await fetch('http://localhost:8080/getIngredients/'+uuid, {method: 'GET'});
+            responseJSON = await response.json();
+            el = document.getElementById("ingredientsTable");
+            el.innerHTML = "";
+            el.appendChild(createTable(responseJSON));
+
+            // populate equipment table
+            response = await fetch('http://localhost:8080/getEquipment/'+uuid, {method: 'GET'});
+            responseJSON = await response.json();
+            el = document.getElementById("equipmentTable");
+            el.innerHTML = "";
+            el.appendChild(createTable(responseJSON));
+
+            // populate techniques table
+            response = await fetch('http://localhost:8080/getTechnique/'+uuid, {method: 'GET'});
+            responseJSON = await response.json();
+            el = document.getElementById("techniqueTable");
+            el.innerHTML = "";
+            el.appendChild(createTable(responseJSON));
         };
 
         function getUrlParameter(name) {
@@ -36,7 +64,7 @@
         }
 
         function createTable(jsonObjList) {
-            if (jsonObjList.length == 0) {return;}
+            if (jsonObjList == null || jsonObjList.length === 0) {return document.createElement("table");}
             let cols = [];
             for (let k in jsonObjList[0]){ cols.push(k);} // Push all keys to the array
 
@@ -66,6 +94,14 @@
 <body>
 <h1 id="title"></h1>
 <table id="recipeTable" border="1px"></table>
+<h2>Tags</h2>
+<table id="tagsTable" border="1px"></table>
+<h2>Ingredients</h2>
+<table id="ingredientsTable" border="1px"></table>
+<h2>Equipment needed</h2>
+<table id="equipmentTable" border="1px"></table>
+<h2>Techniques used</h2>
+<table id="techniqueTable" border="1px"></table>
 <h2>Comments</h2>
 <table id="commentsTable" border="1px"></table>
 </body>
