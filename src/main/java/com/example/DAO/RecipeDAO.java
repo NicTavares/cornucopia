@@ -72,16 +72,13 @@ public class RecipeDAO implements DAO<Recipe>{
 
     @Override
     public void update(Recipe recipe, String id) {
-        String sql = "UPDATE Recipe SET UUID = ?, text = ?, averageScore = ?, estimatedTime = ?, uploaderUUID = ? WHERE UUID = ?";
+        String sql = "UPDATE Recipe  SET name = ?, text = ?, averageScore = ?, estimatedTime = ? WHERE UUID = ?";
         int rows = jdbcTemplate.update(sql,
-                recipe.getUUID(),
                 recipe.getName(),
                 recipe.getText(),
                 recipe.getAverageScore(),
                 recipe.getEstimatedTime(),
-                recipe.getUploaderUUID(),
                 Integer.parseInt(id)
-
         );
     }
 

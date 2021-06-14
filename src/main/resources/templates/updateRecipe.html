@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Update a Recipe</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Update A Recipe</h1>
+<form action="#" th:action="@{/update}" th:object="${RecipePayload}" method="post">
+  <p><input type="hidden" th:field="*{UUID}"/></p>
+  <p>Please Enter the UUID of the recipe you are updating: <input type="number" min="0" max="10000000" th:field="*{uploaderUUID}" /></p>
+  <p>Recipe Name: <input type="text" th:field="*{name}" /></p>
+  <p>Recipe Text: <input type="text" th:field="*{text}" /></p>
+  <p>Estimated Time: <input type="number" min="0" max="1000" th:field="*{estimatedTime}" /></p>
+  <p>Difficulty (out of 5): <input type="number" min="0" max="5" th:field="*{difficulty}" /></p>
+  <p>Tags (Enter separated by commas): <input type="text" th:field="*{tags}" /></p>
+  <p>Ingredients (Enter separated by commas): <input type="text" th:field="*{ingredients}" /></p>
+  <p>Equipment (Enter separated by commas): <input type="text" th:field="*{equipment}" /></p>
+  <p>Techniques (Enter separated by commas): <input type="text" th:field="*{techniques}" /></p>
+  <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>
