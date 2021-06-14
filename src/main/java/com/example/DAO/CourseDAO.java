@@ -3,23 +3,25 @@ package com.example.DAO;
 import com.example.models.Administrator;
 import com.example.models.Course;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
-
+@Component
 public class CourseDAO implements DAO<Course>{
-    private JdbcTemplate jdbcTemplate;
-    private static final Logger log = (Logger) LoggerFactory.getLogger(EquipmentDAO.class);
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     RowMapper<Course> rowMapper = (rs, rowNum) -> {
         Course cs = new Course(rs.getInt("UUID"),
                 rs.getString("text"),
                 rs.getInt("length"),
-                rs.getString("courseName"),
+                rs.getString("name"),
                 rs.getString("requirementName"),
                 rs.getInt("creatorUUID"));
         return cs;
@@ -37,15 +39,14 @@ public class CourseDAO implements DAO<Course>{
 
     @Override
     public void create(Course course) {
-        String sql = "INSERT into Course(UUID, text, length, courseName, requirementName, creatorUUID) values(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT into Course(UUID, text, length, name, requirementName, creatorUUID) values(?, ?, ?, ?, ?, ?)";
         int rows = jdbcTemplate.update(sql,
                 course.getUUID(),
                 course.getText(),
                 course.getLength(),
-                course.getCourseName(),
+                course.getName(),
                 course.getRequirementName(),
-                course.getCreatorUUID(),
-                rowMapper
+                course.getCreatorUUID()
         );
     }
 
@@ -63,16 +64,16 @@ public class CourseDAO implements DAO<Course>{
 
     @Override
     public void update(Course course, String id) {
-        String sql = "UPDATE Course SET UUID = ?, text = ?, length = ?, courseName = ?, requirementName = ?, creatorUUID = ? " +
+        String sql = "UPDATE Course SET UUID = ?, text = ?, length = ?, name = ?, requirementName = ?, creatorUUID = ? " +
                 "WHERE UUID = ?";
         int rows = jdbcTemplate.update(sql,
                     course.getUUID(),
                     course.getText(),
                     course.getLength(),
+                    course.getName(),
                     course.getRequirementName(),
                     course.getCreatorUUID(),
-                    id,
-                    rowMapper
+                    id
                 );
     }
 
@@ -82,4 +83,23 @@ public class CourseDAO implements DAO<Course>{
         int rows = jdbcTemplate.update(sql, rowMapper, id);
         return rows;
     }
+    public int getNextUUID() {
+        String sql = "SELECT MAX(UUID) FROM Course";
+        if(jdbcTemplate.queryForObject(sql, Integer.class )==null){
+            return 0;
+        }
+        else {
+            return jdbcTemplate.queryForObject(sql, Integer.class )+1;
+        }
+
+    }
+
+    public void usrTakeCourse(int usrUUID,int courseUUID) {
+        String sql = "INSERT INTO usrTakeCourse(usrUUID,courseUUID) VALUES (?,?) ";
+        jdbcTemplate.update(sql, usrUUID, courseUUID);
+    }
+
+
+
+
 }

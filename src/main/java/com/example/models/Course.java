@@ -4,20 +4,23 @@ public class Course {
     private int UUID;
     private String text;
     private int length;
-    private String courseName;
+    private String name;
     private String requirementName;
     private int creatorUUID;
-
+    public Course()
+    {
+        super();
+    }
     public Course(int UUID,
                   String text,
                   int length,
-                  String courseName,
+                  String name,
                   String requirementName,
                   int creatorUUID) {
         this.UUID = UUID;
         this.text = text;
         this.length = length;
-        this.courseName = courseName;
+        this.name = name;
         this.requirementName = requirementName;
         this.creatorUUID = creatorUUID;
 
@@ -39,11 +42,15 @@ public class Course {
         return length;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public String getName() {
+        return name;
     }
 
     public String getRequirementName() {
         return requirementName;
+    }
+
+    public void setUUID(int UUID) {
+        this.UUID = UUID;
     }
 }
