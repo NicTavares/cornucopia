@@ -73,11 +73,11 @@ VALUES  (00001, 'Hello', 11111, '2021-05-04 23:31:00', 11112),
 		(00005, 'Check out this recipe', 11111, '2021-05-04 23:36:00', 11112);
 
 INSERT INTO Course(UUID, text, length, name, requirementName, creatorUUID)
-VALUES  (10011, 'Knives are great, hold them with your hand...', 10, 'How to use a knife', 'knife', 11111),
-		(10012, 'Fishes, blah blah...', 10, 'How to debone a fish', 'deboning Knife', 11111),
-		(10013, 'Press the buttons...', 15, 'How to operate a microwave', 'microwave', 11113),
-		(10014, 'Don''t use metal spatula...', 5, 'How to use a non-stick pan', 'non-stick pan', 11111),
-		(10015, 'Water at 80 degrees...', 5, 'How to brew green tea', 'electric kettle', 11112);
+VALUES  (10001, 'Knives are great, hold them with your hand...', 10, 'How to use a knife', 'deboning', 11111),
+		(10002, 'Fishes, blah blah...', 10, 'How to debone a fish', 'knife skills', 11111),
+		(10003, 'Press the buttons...', 15, 'How to operate a microwave', 'knife skills', 11113),
+		(10004, 'Don''t use metal spatula...', 5, 'How to use a non-stick pan', 'deboning', 11111),
+		(10005, 'Water at 80 degrees...', 5, 'How to brew green tea', 'knife skills', 11112);
 INSERT INTO UsrHasIngredient(usrUUID, name, quantity)
 VALUES (11114, "fish", 1),
 (11113, "egg", 8),
@@ -91,6 +91,14 @@ INSERT INTO UsrRateRecipe (usrUUID, recipeUUID, score) VALUES
 (11114, 3,7),
 (11112, 4,9),
 (11113, 5,8);
+
+INSERT INTO UsrTakeCourse (usrUUID, courseUUID) VALUES
+(11111, 10001),
+(11114, 10001),
+(11114, 10002),
+(11112,10001),
+(11113, 10001);
+
 
 INSERT INTO Comment(recipeUUID, commentNumber, text, authorUUID)
 VALUES  (1, 1, 'nice', 11111),
