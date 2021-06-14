@@ -35,10 +35,6 @@ public class SearchRecipeController {
         String operator = searchParams.getOperator();
         float value = searchParams.getValue();
 
-        System.out.println(field);
-        System.out.println(operator);
-        System.out.println(value);
-
         List<Recipe> results = recipeDAO.searchWhere(field, operator, value);
 
         model.addAttribute("searchResult", results.toString());
