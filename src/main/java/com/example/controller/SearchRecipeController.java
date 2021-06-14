@@ -15,17 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SearchRecipeController {
     @GetMapping("/searchRecipe")
-    public String searchRecipes(@ModelAttribute SearchParams searchParams, Model model) throws JSONException {
-        model.addAttribute("SearchParams", searchParams);
-
-        JSONObject obj = new JSONObject();
-        obj.put("field", searchParams.getField());
-        obj.put("operator", searchParams.getOperator());
-        obj.put("value", searchParams.getValue());
-
-
-
-        model.addAttribute("searchResult", obj.toString());
+    public String searchRecipes(Model model) {
+        model.addAttribute("SearchParams", new SearchParams());
+        model.addAttribute("searchResult", new SearchParams());
         return "searchRecipes";
     }
 

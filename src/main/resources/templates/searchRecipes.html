@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Search recipes</h1>
-<form action="#" th:action="@{/searchRecipe}" th:object="${SearchParams}" method="get">
+<form action="#" th:action="@{/searchRecipe}" th:object="${SearchParams}" method="post">
     <label for="field">Choose an field:</label>
     <select id="field" name="field" th:field="*{field}">
         <option value="averageScore">rating</option>
@@ -17,12 +17,10 @@
     <select id="operator" name="operator" th:field="*{operator}">
         <option value="<"><</option>
         <option value="=">=</option>
-        <option value="<">></option>
+        <option value=">">></option>
     </select>
     <p>Comparison value: <input type="number" min="0" th:field="*{value}" /></p>
     <p><input type="submit" value="Submit" /></p>
 </form>
-<!--<h1>Result</h1>-->
-<p th:text="'searchResults: ' + ${searchResult}"></p>
 </body>
 </html>
