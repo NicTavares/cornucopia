@@ -12,5 +12,5 @@ public interface DAO<T>{
 
     void update(T t, String id);
 
-    void delete(String id);
+    int delete(String id);
 }

@@ -58,8 +58,9 @@ public class TechniqueDAO implements DAO<Technique> {
     }
 
     @Override
-    public void delete(String id) {
+    public int delete(String id) {
         String sql = "DELETE FROM Technique WHERE name = ?";
         int update = jdbcTemplate.update(sql, id);
+        return update;
     }
 }

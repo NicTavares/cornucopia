@@ -55,8 +55,8 @@ public class PantryDAO implements DAO<Pantry>{
 
     @Override
     //todo
-    public void delete(String id) {
-
+    public int delete(String id) {
+        return 0;
     }
 
 

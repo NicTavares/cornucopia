@@ -65,8 +65,9 @@ public class EquipmentDAO implements DAO<Equipment>{
     }
 
     @Override
-    public void delete(String id) {
+    public int delete(String id) {
         String sql = "DELETE FROM Equipment WHERE name = ?";
         int update = jdbcTemplate.update(sql, id);
+        return update;
     }
 }

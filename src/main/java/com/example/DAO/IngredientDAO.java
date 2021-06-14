@@ -51,9 +51,10 @@ public class IngredientDAO implements DAO<Ingredient>{
     }
 
     @Override
-    public void delete(String id) {
+    public int delete(String id) {
         String sql = "DELETE FROM Ingredient WHERE name = ?";
         int rows = jdbcTemplate.update(sql, id);
+        return rows;
     }
 //check if the list are set
 //    {

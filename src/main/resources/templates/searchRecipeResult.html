@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <title>Search Recipes Result</title>
 </head>
 <body>
-    <h1>Result</h1>
-    <p th:text="${searchResult}"></p>
+<h1>Result</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Recipe ID</th>
+        <th>Name</th>
+        <th>Content</th>
+        <th>Score</th>
+        <th>Estimated Time</th>
+        <th>Uploader</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="recipe: ${searchResult}">
+            <td th:text="${recipe.UUID}"/>
+            <td th:text="${recipe.name}"/>
+            <td th:text="${recipe.text}"/>
+            <td th:text="${recipe.averageScore}"/>
+            <td th:text="${recipe.estimatedTime}"/>
+            <td th:text="${recipe.uploaderUUID}"/>
+        </tr>
+    </tbody>
+
+</table>
+
+
 </body>
 </html>

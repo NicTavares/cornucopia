@@ -94,9 +94,10 @@ public class UsrDAO implements DAO<Usr>{
     }
 
     @Override
-    public void delete(String id) {
+    public int delete(String id) {
         String sql = "DELETE FROM Usr WHERE UUID = ?";
         int rows = jdbcTemplate.update(sql,  Integer.parseInt(id));
+        return rows;
     }
     public int geNextUUID() {
         String sql = "SELECT MAX(UUID) FROM Usr";
