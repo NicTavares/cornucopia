@@ -90,7 +90,6 @@ public class RecipeDAO implements DAO<Recipe>{
             return jdbcTemplate.queryForObject(sql, Integer.class )+1;
         }
 
-
     }
 
 
