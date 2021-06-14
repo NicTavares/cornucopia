@@ -8,6 +8,7 @@
         window.onload = async function getRecipes() {
             const response = await fetch('http://localhost:8080/getAllRecipe', {method: 'GET'});
             const recipeList = await response.json();
+            if (recipeList.length === 0) {return;}
 
             let cols = [];
             // Push all keys to the array
@@ -25,12 +26,24 @@
                 headerRow.appendChild(theader); // Append columnName to the table row
             }
 
+            let idInd = cols.indexOf("uuid");
+            let nameInd = cols.indexOf("name");
+
             // Adding the data to the table
             for (let i = 0; i < recipeList.length; i++) {
                 tableRow = table.insertRow(-1);
                 for (let j = 0; j < cols.length; j++) {
                     let cell = tableRow.insertCell(-1);
-                    cell.innerHTML = recipeList[i][cols[j]];
+                    // create a link to a recipe info page
+                    if (j === nameInd) {
+                        let link = document.createElement("a");
+                        let linkQuery = "recipeInfo.html?uuid=" + recipeList[i][cols[idInd]];
+                        link.setAttribute("href", linkQuery)
+                        link.innerHTML = recipeList[i][cols[j]];
+                        cell.appendChild(link);
+                    } else {
+                        cell.innerHTML = recipeList[i][cols[j]];
+                    }
                 }
             }
 

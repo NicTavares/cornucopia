@@ -146,8 +146,29 @@ public class RecipeController {
     @GetMapping(path = "/getComment/{recipeUUID}")
     public List<Comment> getComment(@PathVariable int recipeUUID) {
         return commentDAO.getComment(Integer.toString(recipeUUID));
-
     }
+
+    @GetMapping(path = "/getTags/{recipeUUID}")
+    public List<RecipeTag> getTags(@PathVariable int recipeUUID) {
+        return recipeDAO.getTagsByRecipe(Integer.toString(recipeUUID));
+    }
+
+    @GetMapping(path = "/getIngredients/{recipeUUID}")
+    public List<RecipeIngredient> getIngredients(@PathVariable int recipeUUID) {
+        return recipeDAO.getIngredientsByRecipe(Integer.toString(recipeUUID));
+    }
+
+    @GetMapping(path = "/getEquipment/{recipeUUID}")
+    public List<RecipeEquipment> getEquipment(@PathVariable int recipeUUID) {
+        return recipeDAO.getEquipmentByRecipe(Integer.toString(recipeUUID));
+    }
+
+    @GetMapping(path = "/getTechnique/{recipeUUID}")
+    public List<RecipeTechnique> getTechnique(@PathVariable int recipeUUID) {
+        return recipeDAO.getTechniqueByRecipe(Integer.toString(recipeUUID));
+    }
+
+
 
 
 //{

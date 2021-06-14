@@ -102,7 +102,6 @@ public class RecipeDAO implements DAO<Recipe>{
 
     }
 
-
     public void createRecipeTag(int recipeUUID,String tagName) {
         String sql = "INSERT INTO RecipeHasTag(UUID, name) values(?,?)";
         int rows = jdbcTemplate.update(sql,
@@ -146,7 +145,7 @@ public class RecipeDAO implements DAO<Recipe>{
     };
 
     public List<RecipeTag> getTagsByRecipe(String UUID) {
-        String sql = "SELECT * FROM RecipeHasTags WHERE UUID = ?";
+        String sql = "SELECT * FROM RecipeHasTag WHERE UUID = ?";
         return jdbcTemplate.query(sql, tagMapper, UUID);
     }
 
@@ -158,7 +157,7 @@ public class RecipeDAO implements DAO<Recipe>{
     };
 
     public List<RecipeIngredient> getIngredientsByRecipe(String UUID) {
-        String sql = "SELECT * FROM RecipeHasIngredients WHERE UUID = ?";
+        String sql = "SELECT * FROM RecipeHasIngredient WHERE UUID = ?";
         return jdbcTemplate.query(sql, ingredientMapper, UUID);
     }
 
