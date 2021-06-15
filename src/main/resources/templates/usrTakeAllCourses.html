@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Achievements</title>
+</head>
+<body>
+<table>
+  <h1>Users who finish all courses:</h1>
+  <thead>
+  <tr>
+
+    <th>User Name</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="usr: ${searchResult}">
+    <td th:text="${usr}"/>
+  </tr>
+  </tbody>
+
+</table>
+</body>
+</html>
