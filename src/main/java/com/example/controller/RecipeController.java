@@ -140,7 +140,6 @@ public class RecipeController {
         int cnumber = commentDAO.getNextCommentNumber(Integer.toString(comment.getRecipeUUID()));
         comment.setCommentNumber(cnumber);
         commentDAO.create(comment);
-
         return ResponseEntity.ok(cnumber);
     }
 

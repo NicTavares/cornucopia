@@ -110,13 +110,18 @@
     <input id="commentbox" type="text" name="Ntext" size="20">
     <input id="sent" type="submit" value="Post comment">
 </div>
+<div class="info">
+    <label for="ratingbox">Enter rating from 0 to 5</label>
+    <input id="ratingbox" type="number" min="0" max="5" size="20">
+    <input id="rated" type="submit" value="Rate recipe">
+</div>
 </body>
 <script>
     window.onclick = async function(event) {
         let id =  event.target.id;
+        let uuid = getUrlParameter("uuid");
         if (id === 'sent') {
             let txt = document.getElementById('commentbox').value;
-            let uuid = getUrlParameter("uuid");
             let comment = {
                 "recipeUUID":uuid,
                 "commentNumber":1, // will be set in backend
@@ -138,6 +143,22 @@
                 "<td>" + txt + "</td>" +
                 "<td>" + 11111 + "</td>" +  // hardcoded for now
                 "</tr>");
+        }
+
+
+        else if (id === 'rated') {
+            let rating = document.getElementById('ratingbox').value;
+            let UsrRateRecipePayload = {
+                "usrUUID":11115, // hardcoded for now
+                "recipeUUID":uuid,
+                "score":rating
+            }
+            let response = await fetch('http://localhost:8080/usrRateRecipe',
+                {
+                    method: 'POST',
+                    body: JSON.stringify(UsrRateRecipePayload),
+                    headers: {"Content-type": "application/json; charset=UTF-8"}
+                });
         }
     }
 </script>
