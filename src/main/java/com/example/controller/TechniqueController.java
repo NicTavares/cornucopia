@@ -27,11 +27,8 @@ public class TechniqueController {
     }
 
     @PostMapping(path="/addTechnique")
-    public ResponseEntity addTechnique(@RequestBody Technique technique)
-    {
-
+    public ResponseEntity addTechnique(@RequestBody Technique technique) {
         techniqueDAO.create(technique);
-
         return ResponseEntity.ok("New Technique added");
     }
 }
