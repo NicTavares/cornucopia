@@ -137,10 +137,11 @@ public class RecipeController {
 
     @PostMapping(path = "/postComment")
     public ResponseEntity postComment(@RequestBody Comment comment) {
-        comment.setCommentNumber(commentDAO.getNextCommentNumber(Integer.toString(comment.getRecipeUUID())));
+        int cnumber = commentDAO.getNextCommentNumber(Integer.toString(comment.getRecipeUUID()));
+        comment.setCommentNumber(cnumber);
         commentDAO.create(comment);
 
-        return ResponseEntity.ok("commented successfully");
+        return ResponseEntity.ok(cnumber);
     }
 
     @GetMapping(path = "/getComment/{recipeUUID}")
