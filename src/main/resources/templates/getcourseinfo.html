@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Course Info</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h3>Which Course Info do you want?</h3>
+<form action="#" th:action="@{/getcourseinfo}" th:object="${courseInfoPayload}" method="post">
+  <p>Course UUID<input type="checkbox" name="UUID" th:field="${courseInfoPayload.UUID}"/></p>
+  <p>Course Text<input type="checkbox" name="UUID" th:field="${courseInfoPayload.text}"/></p>
+  <p>Course Length<input type="checkbox" name="UUID" th:field="${courseInfoPayload.length}"/></p>
+  <p>Course Name<input type="checkbox" name="UUID" th:field="${courseInfoPayload.name}"/></p>
+  <p>Requirment Name<input type="checkbox" name="UUID" th:field="${courseInfoPayload.requirementName}"/></p>
+  <p>Creator UUID<input type="checkbox" name="UUID" th:field="${courseInfoPayload.creatorUUID}"/></p>
+  <input type="submit" value="Submit">
+</form>
+</body>
+</html>
