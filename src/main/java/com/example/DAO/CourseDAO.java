@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
 @Component
@@ -35,6 +36,19 @@ public class CourseDAO implements DAO<Course>{
     public List<Course> list() {
         String sql = "SELECT * FROM Course";
         return jdbcTemplate.query(sql, rowMapper);
+    }
+
+    public List<Map<String,Object>> projection(List<String> fields) {
+        String sql = "SELECT ";
+        int i;
+        for(i = 0; i < fields.size()-1; i++){
+            sql += fields.get(i);
+            sql += ", ";
+        }
+        sql += fields.get(i);
+        sql += " FROM Course";
+        System.out.println(sql);
+        return jdbcTemplate.queryForList(sql);
     }
 
     @Override
