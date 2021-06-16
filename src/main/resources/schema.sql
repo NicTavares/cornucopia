@@ -115,7 +115,7 @@ CREATE TABLE Message (
     UUID INT PRIMARY KEY,
     text VARCHAR(1000) NOT NULL,
     senderUUID INT,
-    sentTime DATETIME NOT NULL,
+    sentTime VARCHAR(255) NOT NULL,
     receiverUUID INT,
     UNIQUE (senderUUID,receiverUUID,sentTime),
     FOREIGN KEY (senderUUID) REFERENCES Usr(UUID)

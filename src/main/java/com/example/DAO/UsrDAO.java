@@ -100,13 +100,19 @@ public class UsrDAO implements DAO<Usr>{
         int rows = jdbcTemplate.update(sql,  Integer.parseInt(id));
         return rows;
     }
-    public int geNextUUID() {
+    public int getNextUUID() {
         String sql = "SELECT MAX(UUID) FROM Usr";
 
         if(jdbcTemplate.queryForObject(sql, Integer.class )==null){
             return 0;
         }
         else return jdbcTemplate.queryForObject(sql, Integer.class )+1;
+
+    }
+
+    public int getUUIDByUsername(String username) {
+        String sql = "SELECT UUID FROM Usr where username=?";
+        return jdbcTemplate.queryForObject(sql, Integer.class,username);
 
     }
 
