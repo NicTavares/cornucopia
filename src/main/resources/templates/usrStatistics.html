@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Search</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Find users:</h1>
+<form action="#" th:action="@{/getUsrStatisticsResults}" th:object="${SearchParams}" method="post">
+  <label for="field">Choose an field:</label>
+  <select id="field" name="field" th:field="*{field}">
+    <option value="comment">The number of comments</option>
+    <option value="course">The number of finished course</option>
+  </select>
+  <label for="operator">Choose an operator:</label>
+  <select id="operator" name="operator" th:field="*{operator}">
+    <option value="<"><</option>
+    <option value="=">=</option>
+    <option value=">">></option>
+  </select>
+  <p>Comparison value: <input type="number" min="0" th:field="*{value}" /></p>
+  <p><input type="submit" value="Submit" /></p>
+</form>
+</body>
+</html>
