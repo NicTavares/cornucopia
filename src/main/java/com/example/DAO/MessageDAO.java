@@ -69,6 +69,23 @@ public class MessageDAO implements DAO<Message> {
         return m;
     }
 
+    public List<Message> getMessageInboxByUsername(String username) {
+        String sql = "SELECT u1.username as sender, u2.username as receiver, m.text as message, m.sentTime as time ";
+        sql += "FROM Message m, usr u1, usr u2 ";
+        sql += "WHERE m.senderUUID=u1.UUID and m.receiverUUID=u2.UUID ";
+        sql += "AND (u1.username='"+username+"' OR u2.username='"+username+"')";
+
+        System.out.println(sql);
+
+        List<Message> m = null;
+        try{
+            m = jdbcTemplate.query(sql, rowMapper);
+        }catch(DataAccessException e) {
+            System.out.println(e.getMessage());
+        }
+        return m;
+    }
+
     @Override
     public void update(Message message, String id) {
         String sql = "UPDATE Message SET UUID = ?, text = ?, senderUUID = ?, sentTime = ?, receiverUUID = ? WHERE UUID = ?";

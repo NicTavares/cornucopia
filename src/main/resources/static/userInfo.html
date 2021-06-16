@@ -31,8 +31,16 @@
 </div>
 <table id="messagesTable" border="1px"></table>
 <script>
-  function setPageUsername() {
-    document.getElementById("username").innerHTML = document.getElementById("usernameInput").value;
+  async function setPageUsername() {
+      let username = document.getElementById("usernameInput").value;
+      document.getElementById("username").innerHTML = username;
+
+      // populate messages table
+      response = await fetch('http://localhost:8080/getMessagesByUsername/'+username, {method: 'GET'});
+      responseJSON = await response.json();
+      el = document.getElementById("messagesTable");
+      el.innerHTML = "";
+      el.appendChild(createTable(responseJSON));
   }
 
   function createTable(jsonObjList) {
@@ -116,9 +124,12 @@
               });
           let responseJSON = await response.json();
 
-          el = document.getElementById("messagesTable");
-          el.innerHTML = "";
-          el.appendChild(createTable(responseJSON));
+          // $("#messagesTable tbody").append("<tr>" +
+          //     "<td>" + uuid + "</td>" +
+          //     "<td>" + responseJSON.toString() + "</td>" +
+          //     "<td>" + txt + "</td>" +
+          //     "<td>" + 11111 + "</td>" +  // hardcoded for now
+          //     "</tr>");
       }
   }
 </script>

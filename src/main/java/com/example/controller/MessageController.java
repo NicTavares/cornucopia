@@ -23,7 +23,11 @@ public class MessageController {
         return messageDAO.getMessageInbox(Integer.toString(usrUUID));
     }
 
-
+    @GetMapping(path="/getMessagesByUsername/{username}")
+    public List<Message> getMessagesByUsername(@PathVariable String username)
+    {
+        return messageDAO.getMessageInboxByUsername(username);
+    }
 
     @PostMapping(path="/sendMessage")
     public ResponseEntity sendMessage(@RequestBody MessagePayload messagePayload)
