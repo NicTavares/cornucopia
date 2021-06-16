@@ -20,9 +20,7 @@ public class MessageController {
     }
 
     @PostMapping(path="/sendMessage")
-    public ResponseEntity sendMessage(@RequestBody Message message)
-
-    {
+    public ResponseEntity sendMessage(@RequestBody Message message) {
         message.setUUID(messageDAO.getNextUUID());
         messageDAO.create(message);
         return ResponseEntity.ok("Message sent");
