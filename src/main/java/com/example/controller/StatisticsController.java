@@ -1,9 +1,11 @@
 package com.example.controller;
 
 import com.example.DAO.RecipeDAO;
+import com.example.DAO.UtilDAO;
 import com.example.models.Recipe;
 import com.example.models.RecipePayload;
 import com.example.models.SearchParams;
+import com.example.models.StatisticsParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,26 +18,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.*;
 
 @Controller
-public class SearchRecipeController {
+public class StatisticsController {
 
     @Autowired
-    RecipeDAO recipeDAO;
-
-    @GetMapping("/searchRecipe")
+    UtilDAO utilDAO;
+    @GetMapping("/getStatistics")
     public String searchRecipes(Model model) {
-        model.addAttribute("SearchParams", new SearchParams());
-        model.addAttribute("searchResult", new SearchParams());
-        return "searchRecipes";
+        model.addAttribute("StatisticsParams", new StatisticsParams());
+        model.addAttribute("StatisticsResults", new StatisticsParams());
+        return "statistics";
     }
 
 
-    @PostMapping("/searchRecipe")
+    @PostMapping("/getStatisticsResults")
     public String searchRecipeResults(@ModelAttribute SearchParams searchParams, Model model) {
         String field = searchParams.getField();
         String operator = searchParams.getOperator();
-        float value = searchParams.getValue();
-
-        List<Recipe> results = recipeDAO.searchWhere(field, operator, value);
+        List<Recipe> results = utilDAO.searchStatistics(field, operator);
 
         model.addAttribute("searchResult", results);
         return "searchRecipeResult";
