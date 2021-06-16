@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 @Component
 public class UsrDAO implements DAO<Usr>{
@@ -127,11 +128,28 @@ public class UsrDAO implements DAO<Usr>{
             },usrUUID);
             return data;
         }catch(DataAccessException e) {}
-
-
         return null;
     }
 
+    public List<Map<String,Object>> joinUsrAndTable(String username, String queryTable) {
+        String sql = "SELECT u.username, v.name ";
+        sql += "FROM Usr u, "+queryTable+ " f, ";
+
+        if (queryTable.equals("UsrFavouriteRecipe")) {
+            sql += "Recipe v ";
+        } else if (queryTable.equals("UsrTakeCourse")) {
+            sql += "Course v ";
+        }
+
+        sql += "where u.UUID=f.usrUUID AND u.username='"+username+"' AND v.UUID=f.";
+
+        if (queryTable.equals("UsrFavouriteRecipe")) {
+            sql += "recipeUUID";
+        } else if (queryTable.equals("UsrTakeCourse")) {
+            sql += "courseUUID";
+        }
+        return jdbcTemplate.queryForList(sql);
+    }
 
 
 }

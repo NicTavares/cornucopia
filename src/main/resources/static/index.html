@@ -3,7 +3,6 @@
 <head>
     <title>Cornucopia</title>
     <link rel='stylesheet' href="./style.css"/>
-<!--    <script src="./global.js"></script>-->
     <script type="text/javascript">
         window.onload = async function getRecipes() {
             const response = await fetch('http://localhost:8080/getAllRecipe', {method: 'GET'});
@@ -56,16 +55,20 @@
 </head>
 <body>
     <nav>
-        <a href="/uploadRecipe">Add a Recipe!</a> |
         <a href="loginPage.html">Login</a> |
         <a href="/signup">Create an account</a> |
+        <a href="/userInfo.html">User Info</a>
+    </nav>
+    <nav>
+        <a href="/getcourseinfo">Information about Courses</a> |
+        <a href="/getUsrTakeAllCourses">Courses Dashboard</a> |
+        <a href="/getStatistics">Statistics</a>
+    </nav>
+    <nav>
+        <a href="/uploadRecipe">Add a Recipe!</a> |
         <a href="/delete">Delete a Recipe</a> |
         <a href="/update">Update a Recipe</a> |
-        <a href="/searchRecipe">Search Recipes</a> |
-        <a href="/getUsrTakeAllCourses">Dashboard</a> |
-        <a href="/getStatistics">Statistics</a> |
-        <a href="/getcourseinfo">Get Course Information</a>
-
+        <a href="/searchRecipe">Search Recipes</a>
     </nav>
     <h1>Cornucopia</h1>
     <p>Welcome to Cornucopia, your recipe centre!</p>
