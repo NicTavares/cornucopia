@@ -24,7 +24,7 @@ public class SignUpController {
 
     @PostMapping("/signup")
     public String greetingSubmit(@ModelAttribute Usr usr, Model model) {
-        usr.setUUID(usrDAO.geNextUUID());
+        usr.setUUID(usrDAO.getNextUUID());
         usrDAO.create(usr);
         return "success";
     }
