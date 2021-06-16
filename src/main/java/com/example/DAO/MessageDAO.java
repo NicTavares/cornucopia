@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 @Component
 public class MessageDAO implements DAO<Message> {
@@ -58,28 +59,29 @@ public class MessageDAO implements DAO<Message> {
 
 
 
-    public List<Message> getMessageInbox(String id) {
-        String sql = "SELECT * FROM Message WHERE receiverUUID = ?";
-        List<Message> m = null;
+    public List<Map<String, Object>> getMessageInbox(String id) {
+        String sql = "SELECT u1.username as sender, u2.username as receiver, m.text as message, m.sentTime as time ";
+        sql += "FROM Message as m, Usr as u1, Usr as u2 ";
+        sql += "WHERE u1.UUID=m.senderUUID and u2.UUID=m.receiverUUID ";
+        sql += "AND (u1.UUID=? OR u2.UUID=?)";
+        List<Map<String, Object>> m = null;
         try{
-            m = jdbcTemplate.query(sql, rowMapper, id);
+            m = jdbcTemplate.queryForList(sql, id, id);
         }catch(DataAccessException e) {
             System.out.println(e.getMessage());
         }
         return m;
     }
 
-    public List<Message> getMessageInboxByUsername(String username) {
+    public List<Map<String, Object>> getMessageInboxByUsername(String username) {
         String sql = "SELECT u1.username as sender, u2.username as receiver, m.text as message, m.sentTime as time ";
-        sql += "FROM Message m, usr u1, usr u2 ";
+        sql += "FROM Message m, Usr u1, Usr u2 ";
         sql += "WHERE m.senderUUID=u1.UUID and m.receiverUUID=u2.UUID ";
-        sql += "AND (u1.username='"+username+"' OR u2.username='"+username+"')";
+        sql += "AND (u1.username=? OR u2.username=?)";
 
-        System.out.println(sql);
-
-        List<Message> m = null;
+        List<Map<String, Object>> m = null;
         try{
-            m = jdbcTemplate.query(sql, rowMapper);
+            m = jdbcTemplate.queryForList(sql, username, username);
         }catch(DataAccessException e) {
             System.out.println(e.getMessage());
         }

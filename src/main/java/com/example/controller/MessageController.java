@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class MessageController {
@@ -18,13 +19,13 @@ public class MessageController {
     UsrDAO usrDAO;
 
     @GetMapping(path="/getMessage/{usrUUID}")
-    public List<Message> getMessage(@PathVariable int usrUUID)
+    public List<Map<String, Object>> getMessage(@PathVariable int usrUUID)
     {
         return messageDAO.getMessageInbox(Integer.toString(usrUUID));
     }
 
     @GetMapping(path="/getMessagesByUsername/{username}")
-    public List<Message> getMessagesByUsername(@PathVariable String username)
+    public List<Map<String, Object>> getMessagesByUsername(@PathVariable String username)
     {
         return messageDAO.getMessageInboxByUsername(username);
     }

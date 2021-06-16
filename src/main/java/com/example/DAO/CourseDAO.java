@@ -47,7 +47,6 @@ public class CourseDAO implements DAO<Course>{
         }
         sql += fields.get(i);
         sql += " FROM Course";
-        System.out.println(sql);
         return jdbcTemplate.queryForList(sql);
     }
 

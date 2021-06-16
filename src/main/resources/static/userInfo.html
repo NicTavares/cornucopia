@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>User Info</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <h1>User Profile</h1>
@@ -108,8 +109,6 @@
           let timeString= t.getFullYear()+"-"+(parseInt(t.getMonth())+1)+"-"+t.getDate()+" ";
           timeString += t.getHours()+":"+t.getMinutes()+":"+t.getSeconds();
 
-          alert(timeString);
-
           let requestBody = {
               "senderUsrName":username,
               "receiverUsrName":destUser,
@@ -122,14 +121,13 @@
                   body: JSON.stringify(requestBody),
                   headers: {"Content-type": "application/json; charset=UTF-8"}
               });
-          let responseJSON = await response.json();
 
-          // $("#messagesTable tbody").append("<tr>" +
-          //     "<td>" + uuid + "</td>" +
-          //     "<td>" + responseJSON.toString() + "</td>" +
-          //     "<td>" + txt + "</td>" +
-          //     "<td>" + 11111 + "</td>" +  // hardcoded for now
-          //     "</tr>");
+          $("#messagesTable tbody").append("<tr>" +
+              "<td>" + username + "</td>" +
+              "<td>" + destUser + "</td>" +
+              "<td>" + message + "</td>" +
+              "<td>" + timeString + "</td>" +
+              "</tr>");
       }
   }
 </script>
