@@ -7,6 +7,8 @@ public class Course {
     private String name;
     private String requirementName;
     private int creatorUUID;
+
+
     public Course()
     {
         super();

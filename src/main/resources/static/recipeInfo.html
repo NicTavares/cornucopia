@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Recipe Info</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
         window.onload = async function populatePage() {
             let uuid = getUrlParameter("uuid");
@@ -104,5 +105,61 @@
 <table id="techniqueTable" border="1px"></table>
 <h2>Comments</h2>
 <table id="commentsTable" border="1px"></table>
+<div class="info">
+    <label for="commentbox">Enter Text</label>
+    <input id="commentbox" type="text" name="Ntext" size="20">
+    <input id="sent" type="submit" value="Post comment">
+</div>
+<div class="info">
+    <label for="ratingbox">Enter rating from 0 to 5</label>
+    <input id="ratingbox" type="number" min="0" max="5" size="20">
+    <input id="rated" type="submit" value="Rate recipe">
+</div>
 </body>
+<script>
+    window.onclick = async function(event) {
+        let id =  event.target.id;
+        let uuid = getUrlParameter("uuid");
+        if (id === 'sent') {
+            let txt = document.getElementById('commentbox').value;
+            let comment = {
+                "recipeUUID":uuid,
+                "commentNumber":1, // will be set in backend
+                "text":txt,
+                "authorUUID":11111  // hardcoded for now
+            }
+
+            let response = await fetch('http://localhost:8080/postComment',
+                {
+                    method: 'POST',
+                    body: JSON.stringify(comment),
+                    headers: {"Content-type": "application/json; charset=UTF-8"}
+                });
+            let responseJSON = await response.json();
+            // update comment table
+            $("#commentsTable tbody").append("<tr>" +
+                "<td>" + uuid + "</td>" +
+                "<td>" + responseJSON.toString() + "</td>" +
+                "<td>" + txt + "</td>" +
+                "<td>" + 11111 + "</td>" +  // hardcoded for now
+                "</tr>");
+        }
+
+
+        else if (id === 'rated') {
+            let rating = document.getElementById('ratingbox').value;
+            let UsrRateRecipePayload = {
+                "usrUUID":11115, // hardcoded for now
+                "recipeUUID":uuid,
+                "score":rating
+            }
+            let response = await fetch('http://localhost:8080/usrRateRecipe',
+                {
+                    method: 'POST',
+                    body: JSON.stringify(UsrRateRecipePayload),
+                    headers: {"Content-type": "application/json; charset=UTF-8"}
+                });
+        }
+    }
+</script>
 </html>
