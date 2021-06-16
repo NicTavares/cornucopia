@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>User Dashboard</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>User Dashboard</h1>
+<form action="#" th:action="@{/getUsrDashboardResults}" th:object="${DashBoardParams}" method="post">
+  <label for="field">Choose an field:</label>
+  <select id="field" name="field" th:field="*{field}">
+    <option value="comment">Commented all recipes</option>
+    <option value="course">Finished all courses</option>
+  </select>
+  <p><input type="submit" value="Submit" /></p>
+</form>
+</body>
+</html>

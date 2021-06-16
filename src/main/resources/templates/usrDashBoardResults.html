@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <title>Search Recipes Result</title>
+</head>
+<body>
+<h1>Dashboard Result</h1>
+<table>
+  <thead>
+  <tr>
+    <th>UUID</th>
+    <th>Name</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="each: ${searchResult}">
+    <td th:text="${each.UUID}"/>
+    <td th:text="${each.name}"/>
+
+
+  </tr>
+  </tbody>
+
+</table>
+
+
+</body>
+</html>
