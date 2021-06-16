@@ -6,6 +6,7 @@ import com.example.DAO.UsrDAO;
 import com.example.DAO.UtilDAO;
 import com.example.models.Recipe;
 import com.example.models.SearchParams;
+import com.example.models.UserinfoPayload;
 import com.example.models.Usr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -90,7 +92,13 @@ public class UsrController {
         return usrDAO.getFavouriteRecipes(UUID);
     }
 
+    @PostMapping(path = "/getFavouritesOrCoursesByUsername")
+    public List<Map<String, Object>> getFavouritesOrCoursesByUsername(@RequestBody UserinfoPayload userinfoPayload) {
+        String username = userinfoPayload.getUsername();
+        String queryTable = userinfoPayload.getTable();
 
+        return usrDAO.joinUsrAndTable(username, queryTable);
+    }
 
 }
 //
