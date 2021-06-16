@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Course Upload</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Upload A Course</h1>
+<form action="#" th:action="@{/uploadcourse}" th:object="${Course}" method="post">
+  <p><input type="hidden" th:field="*{UUID}"/></p>
+  <p>Please Enter your UUID: <input type="number" min="0" max="10000000" th:field="*{creatorUUID}" /></p>
+  <p>Course Name: <input type="text" th:field="*{name}" /></p>
+  <p>Course Text: <input type="text" th:field="*{text}" /></p>
+  <p>Course Length: <input type="number" min="0" max="1000" th:field="*{length}" /></p>
+  <p>This Course Teaches: <input type="text" th:field="*{requirementName}" /></p>
+  <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>

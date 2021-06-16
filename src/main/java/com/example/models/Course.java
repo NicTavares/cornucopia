@@ -55,4 +55,36 @@ public class Course {
     public void setUUID(int UUID) {
         this.UUID = UUID;
     }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRequirementName(String requirementName) {
+        this.requirementName = requirementName;
+    }
+
+    public void setCreatorUUID(int creatorUUID) {
+        this.creatorUUID = creatorUUID;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "UUID=" + UUID +
+                ", text='" + text + '\'' +
+                ", length=" + length +
+                ", name='" + name + '\'' +
+                ", requirementName='" + requirementName + '\'' +
+                ", creatorUUID=" + creatorUUID +
+                '}';
+    }
 }
