@@ -1,7 +1,7 @@
 package com.example.DAO;
 
-import com.example.models.Pantry;
 import com.example.models.Recipe;
+import com.example.models.UsrStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -56,5 +56,31 @@ public class UtilDAO {
         return jdbcTemplate.query(sql, rowMapper);
     }
 
+    public List<UsrStatistics> getUsrStatistics(String field, String operator, float value) {
+        String table;
+        String attribute;
+        String attribute2;
+        if (field.equals("course")) {
+            table = "UsrTakeCourse";
+            attribute = "usrUUID";
+            attribute2="courseUUID";
+        } else {
+            table = "Comment";
+            attribute = "authorUUID";
+            attribute2="text";
+        }
 
+        String sql = String.format("SELECT UUID,name ,count(%s.%s) as value FROM Usr left join %s on usr.UUID= %s.%s group by UUID,name having count(%s.%s) %s %f;", table,attribute2,table, table,attribute, table,attribute2,operator,value);
+
+        RowMapper<UsrStatistics> rowMapper = (rs, rowNum) -> {
+            UsrStatistics r = new UsrStatistics(rs.getInt("UUID"),
+                    rs.getString("name"),
+                    rs.getInt("value")
+            );
+            return r;
+        };
+
+
+        return jdbcTemplate.query(sql, rowMapper);
+    }
 }
