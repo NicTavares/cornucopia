@@ -1,6 +1,7 @@
 package com.example.DAO;
 
 import com.example.models.Pantry;
+import com.example.models.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -37,4 +38,23 @@ public class UtilDAO {
             return null;
         }
     }
+
+    public List<Recipe> searchStatistics(String field, String operator) {
+        String sql =String.format( "SELECT * FROM Recipe where %s =(select %s(%s) from Recipe)", field,operator,field);
+        RowMapper<Recipe> rowMapper = (rs, rowNum) -> {
+            Recipe r = new Recipe(rs.getInt("UUID"),
+                    rs.getString("name"),
+                    rs.getString("text"),
+                    rs.getFloat("averageScore"),
+                    rs.getFloat("estimatedTime"),
+                    rs.getInt("uploaderUUID")
+            );
+            return r;
+        };
+
+
+        return jdbcTemplate.query(sql, rowMapper);
+    }
+
+
 }

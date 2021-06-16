@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Search</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Get recipes statistics</h1>
+<form action="#" th:action="@{/getStatisticsResults}" th:object="${StatisticsParams}" method="post">
+  <label for="field">Choose an field:</label>
+  <select id="field" name="field" th:field="*{field}">
+    <option value="averageScore">Recipe Score</option>
+    <option value="estimatedTime">Estimated Time</option>
+  </select>
+  <label for="operator">Choose an operator:</label>
+  <select id="operator" name="operator" th:field="*{operator}">
+    <option value="max">is highest</option>
+    <option value="min">is lowest</option>
+
+  </select>
+  <p><input type="submit" value="Submit" /></p>
+</form>
+</body>
+</html>
