@@ -142,5 +142,8 @@ INSERT INTO Comment(recipeUUID, commentNumber, text, authorUUID)
 VALUES  (1, 1, 'nice', 11111),
 		(3, 2, 'Noice', 11114),
 		(1, 3, 'bad', 11114),
-		(4, 4, 'nice recipe :)', 11115),
-		(4, 1, 'not good', 11115);
+		(1, 2, 'nice recipe :)', 11115),
+		(2, 1, 'not good', 11115),
+        (3, 1, 'not good', 11115),
+        (4, 1, 'not good', 11115),
+        (5, 1, 'not good', 11115);
