@@ -25,7 +25,6 @@ public class AdministratorController {
                     .body("Wrong username");
         }
         else{
-            //log.info(usrDAO.getPasswordByUsername(authPayload.username).get());
             if (administratorDAO.getPasswordByUUID(authPayload.UUID).get().equals(authPayload.password)){
                 return ResponseEntity.ok("ok");
             }

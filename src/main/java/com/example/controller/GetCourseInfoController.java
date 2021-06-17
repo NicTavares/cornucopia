@@ -37,7 +37,6 @@ public class GetCourseInfoController {
         if(courseInfoPayload.isRequirementName()) { columns.add("requirementName"); }
         if(courseInfoPayload.isCreatorUUID()) { columns.add("creatorUUID"); }
         List<Map<String, Object>> rows = courseDAO.projection(columns);
-        System.out.println(rows);
         model.addAttribute("rows", rows);
         return "courseInfoResults";
     }

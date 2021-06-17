@@ -34,7 +34,6 @@ public class CourseUploadController {
 
     @PostMapping("/uploadcourse")
     public String uploaded(Model model, @ModelAttribute Course course) {
-        System.out.println(course);
         Optional<Technique> t = techniqueDAO.get(course.getRequirementName());
         Optional<Administrator> a = administratorDAO.get(Integer.toString(course.getCreatorUUID()));
         if(t.isEmpty()) {

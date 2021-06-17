@@ -30,7 +30,6 @@ public class CourseController {
 
         int currentUUID = courseDAO.getNextUUID();
         course.setUUID(currentUUID);
-        System.out.println(course.getRequirementName());
         if (course.getRequirementName() != null) {
             Optional t = techniqueDAO.get(course.getRequirementName());
             if (t.isEmpty()) {
