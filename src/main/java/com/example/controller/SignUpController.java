@@ -28,20 +28,4 @@ public class SignUpController {
         usrDAO.create(usr);
         return "success";
     }
-
-
-//    @GetMapping("/greeting")
-//    public String greetingForm(Model model) {
-//        model.addAttribute("greeting", new Greeting());
-//        return "greeting";
-//    }
-//
-//    @PostMapping("/greeting")
-//    public String greetingSubmit(@ModelAttribute Greeting greeting, Model model) {
-//        //model.addAttribute("greeting", greeting);
-//        System.out.println(greeting);
-//        System.out.println(model);
-//        return "result";
-//    }
-
 }
