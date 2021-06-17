@@ -55,7 +55,8 @@ public class UtilDAO {
             attribute2="text";
         }
 
-        String sql = String.format("SELECT UUID,name ,count(%s.%s) as value FROM Usr left join %s on usr.UUID= %s.%s group by UUID,name having count(%s.%s) %s %f;", table,attribute2,table, table,attribute, table,attribute2,operator,value);
+        String sql = String.format
+                ("select temp.UUID,temp.name,temp.value from (SELECT UUID,name ,count(%s.%s) as value FROM Usr left join %s on usr.UUID= %s.%s group by UUID,name )as temp where value %s %f;", table,attribute2,table, table,attribute,operator,value);
 
         RowMapper<UsrStatistics> rowMapper = (rs, rowNum) -> {
             UsrStatistics r = new UsrStatistics(rs.getInt("UUID"),
